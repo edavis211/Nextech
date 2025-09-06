@@ -1,0 +1,42 @@
+footer.site-footer {
+  .footer-cta {
+    background-color: $color__orange;
+    color: #fff;
+    padding-inline: clamp(1rem, 5vw, 6rem);
+    padding-block: 4rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem 4rem;
+
+    h2 {
+      margin: 0 auto;
+      font-size: 1.75rem;
+      text-align: center;
+    }
+
+    .button {
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      background-color: transparent;
+      color: #fff;
+      padding: 0.75rem 2.5rem;
+      text-decoration: none;
+      border: 2px solid #fff;
+      font-family: $font__heading;
+      letter-spacing: 0.05em;
+      margin: auto;
+      transition: all 0.3s ease-in-out;
+
+      &:hover,
+      &:focus {
+        background-color: #ffffff33;
+        text-decoration: none;
+      }
+    }
+  }
+}

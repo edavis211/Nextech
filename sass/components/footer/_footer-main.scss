@@ -1,0 +1,204 @@
+footer.site-footer {
+  .footer-main {
+    background-color: $color__background-dark;
+    display: grid;
+    gap: 2rem 4rem;
+    padding-block: clamp(4rem, 7vw, 7rem);
+    padding-inline: clamp(1rem, 5vw, 6rem);
+    grid-template-areas: 'subscribe info links';
+    @media screen and (max-width: 1100px) {
+      grid-template-areas: 'subscribe subscribe' 'info links';
+    }
+    @media screen and (max-width: 700px) {
+      grid-template-areas: 'subscribe subscribe' 'info info' 'links links';
+    }
+
+    .subscribe {
+      max-width: 20rem;
+      grid-area: subscribe;
+      @media screen and (max-width: 1100px) {
+        max-width: 100%;
+        margin-bottom: 60px;
+      }
+      h2 {
+        font-size: 1.75rem;
+        margin: 0;
+        color: #fff;
+      }
+
+      form {
+        background-color: transparent;
+        border-bottom: 2px solid #fff;
+        display: flex;
+        align-items: center;
+        margin-block: 1.5rem;
+        &:focus-within {
+          border-color: $color__orange;
+        }
+        input {
+          background-color: transparent;
+          width: 100%;
+          border: none;
+          color: #fff;
+          padding: 0.5rem 0;
+          &:focus {
+            outline: none;
+          }
+        }
+        button {
+          background-color: transparent;
+          border: none;
+          color: #fff;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.5rem;
+
+          svg {
+            width: 1.5rem;
+            polyline,
+            line {
+              stroke: $color__orange;
+              stroke-width: 2;
+              fill: none;
+              stroke-linecap: round;
+            }
+          }
+          &:hover,
+          &:focus {
+            outline: 2px solid #fff;
+            text-decoration: none;
+            svg {
+              transform: scale(1.1);
+            }
+          }
+        }
+      }
+
+      .social {
+        display: flex;
+        gap: 1rem;
+        padding-block: 1rem;
+        a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 2.5rem;
+          height: 2.5rem;
+          background-color: $color__teal;
+          border-radius: 50%;
+          &:nth-child(2) {
+            background-color: $color__orange;
+          }
+          &:nth-child(3) {
+            background-color: $color__yellow;
+          }
+          svg {
+            fill: #fff;
+            max-height: 1.25rem;
+            width: auto;
+            transition: all 0.3s ease-in-out;
+          }
+          &:hover,
+          &:focus {
+            outline: 2px solid #fff;
+            text-decoration: none;
+            svg {
+              transform: scale(1.1);
+            }
+          }
+        }
+      }
+    }
+
+    .site-info {
+      color: #fff;
+      max-width: 310px;
+      height: 100%;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      grid-area: info;
+      @media screen and (max-width: 1100px) {
+        align-items: flex-start;
+        margin: 0;
+      }
+      @media screen and (max-width: 700px) {
+        margin: auto;
+        text-align: center;
+      }
+      svg {
+        max-width: 250px;
+        height: auto;
+        margin-bottom: 1rem;
+        g.powered-by,
+        g.title {
+          polygon,
+          path {
+            fill: #fff;
+          }
+        }
+      }
+      p {
+        font-size: .875rem;
+        text-align: center;
+        @media screen and (max-width: 1100px) {
+          text-align: left;
+        } 
+        @media screen and (max-width: 700px) {
+          text-align: center;
+        }
+      }
+    }
+
+    .links {
+      display: flex;
+      justify-content: flex-end;
+      gap: clamp(2rem, 8vw, 10rem);
+      grid-area: links;
+      @media screen and (max-width: 1100px) {
+        justify-content: space-between;
+      }
+      @media screen and (max-width: 700px) {
+        justify-content: center;
+        gap: 4rem;
+        margin-top: 2rem;
+      }
+      .col {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        h2 {
+          font-size: .9375rem;
+          color: #fff;
+          margin: 0;
+          text-transform: uppercase;
+        }
+        ul {
+          padding: 0;
+          list-style: none;
+          margin: 0;
+          li {
+            a {
+              color: #fff;
+              text-decoration: none;
+              font-size: 1rem;
+              display: block;
+              margin-block: 0.5rem;
+              transition: all 0.3s ease-in-out;
+              &:hover,
+              &:focus {
+                text-decoration: underline;
+                color: $color__orange;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+body {
+	background: $color__background-body; // Fallback for when there is no custom background color defined.
+	color: $color__text-main;
+	font-size: 100%;
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	padding: 0;
+	margin: 0;
+}

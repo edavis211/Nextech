@@ -1,0 +1,34 @@
+footer.site-footer {
+  .footer-copyright {
+    background-color: $color__background-black;
+    color: #b3b3b3;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    font-size: .875rem;
+    padding-block: 1.5rem;
+    padding-inline: clamp(1rem, 5vw, 6rem);
+    p {
+      margin: 0;
+      padding: 0;
+      a {
+        color: #b3b3b3;
+        text-decoration: underline;
+        &:hover,
+        &:focus {
+          color: $color__orange;
+        }
+      }
+
+      @media screen and (min-width: 600px) {
+        &:not(:last-child) {
+          &::after {
+            content: " | ";
+            padding-left: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}
