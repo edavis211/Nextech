@@ -1,0 +1,98 @@
+section.two_column_image_blocks {
+  padding-inline: clamp(1rem, 5vw, 3rem);
+  padding-block: 5rem;
+  .container {
+    max-width: 80rem;
+    margin: auto;
+    .header {
+      padding-bottom: 3rem;
+      max-width: 1000px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      h2 {
+        font-size: clamp(2rem, 4vw, 2.625rem);
+        line-height: 1.25;
+        text-align: right;
+        margin: 0;
+        @media screen and (max-width: 768px) {
+          text-align: center;
+        }
+      }
+      p {
+        margin: 0;
+        padding-top: .5rem;
+      }
+    }
+    .blocks {
+      background-color: #fff;
+      .block {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        grid-template-areas: "text image";
+        background-color: $color__background-black;
+        color: #fff;
+        &:nth-child(even) {
+          background-color: $color__background-dark;
+          grid-template-areas: "image text";
+        }
+        @media screen and (max-width: 768px) {
+          grid-template-areas: "image" "text";
+          grid-template-columns: 1fr;
+          min-height: 300px;
+          gap: 40px;
+          &:nth-child(even) {
+            grid-template-areas: "image" "text";
+            margin-top: 40px;
+          }
+        }
+        .imgcol {
+          grid-area: image;
+          position: relative;
+          height: 100%;
+          min-height: 300px;
+          img {
+            min-height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+          }
+        }
+        .textcol {
+          grid-area: text;
+          padding-inline: clamp(1rem, 5vw, 4rem);
+          padding-block: clamp(2rem, 5vw, 5rem);
+          @media screen and (max-width: 768px) {
+            padding-inline: 1rem;
+            padding-block: 1rem;
+          }
+          h3 {
+            font-size: 1.75rem;
+            margin: 0 0 1rem 0;
+          }
+          // p {
+          //   margin: 0;
+          //   font-size: 1.5rem;
+          //   line-height: 1.6;
+          // }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,108 @@
+section.video-block {
+  background-color: $color__background-dark;
+  padding-block: clamp(3rem, 10vw, 10rem);
+  padding-inline: clamp(1rem, 5vw, 3rem);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  .inner {
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: 20px 20px 0px 20px;
+    border-radius: 20px;
+    background-color: #fff;
+  }
+  .video-wrapper {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    .play-button {
+      width: clamp(80px, 10vw, 160px);
+      height: clamp(80px, 10vw, 160px);
+      background-color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      svg {
+        width: 30%;
+        height: auto;
+        transition: all 0.3s ease;
+      }
+      &:hover,
+      &:focus {
+        svg {
+          transform: scale(1.1);
+          path {
+            fill: $color__orange;
+          }
+        }
+      }
+    }
+  }
+  .infowrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: clamp(1rem, 3vw, 2rem);
+    padding-top: 1rem;
+    padding-bottom: .5rem;
+    gap: 1rem;
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 1.75rem);
+      line-height: 1.2;
+      margin: 0;
+      color: $color__background-dark;
+      max-width: 50%;
+    }
+    .learn-more-button {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: .875rem;
+      letter-spacing: 0.1em;
+      font-family: $font__heading;
+      font-weight: 700;
+      line-height: 1.5;
+      text-align: center;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      text-transform: uppercase;
+      color: $color__text-main;
+      margin-bottom: .5rem;
+      &:hover,
+      &:focus {
+        text-decoration: none;
+        span {
+          text-decoration: underline;
+          text-decoration-color: $color__orange;
+        }
+        svg {
+          transform: translateX(5px);
+        }
+      }
+
+      svg {
+        width: 1.5rem;
+        height: auto;
+        transition: all 0.3s ease;
+        polyline,
+        line {
+          stroke: $color__orange;
+          stroke-width: 2px;
+          fill: none;
+        }
+      }
+
+    }
+  }
+}

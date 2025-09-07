@@ -54,6 +54,16 @@ function custom_tinymce_settings( $init ) {
                 ),
             ),
         ),
+        array(
+            'title' => 'Link Styles',
+            'items' => array(
+                array(
+                    'title' => 'Button Orange',
+                    'selector' => 'a',
+                    'classes' => 'button-orange',
+                ),
+            ),
+        )
     ));
     
     // Enable the style formats dropdown in the toolbar

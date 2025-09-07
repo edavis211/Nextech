@@ -27,6 +27,10 @@ get_header();
 			<?php get_template_part( 'template-parts/homepage/section', 'quick-links' ); ?>
 			<?php get_template_part( 'template-parts/homepage/section', 'search' ); ?>
 
+			<div class="page-blocks-container">
+				<?php get_template_part( 'template-parts/page-blocks/block-controller' ); ?>
+			</div>
+
 
 		<?php endwhile; ?>
 

@@ -8,6 +8,19 @@ p.lead {
 	line-height: 1.4;
 }
 
+.text-small {
+	font-size: 0.875rem;
+}
+
+.text-label {
+	display: block;
+	font-size: 0.9375rem;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	margin-bottom: .25em;
+	text-transform: uppercase;
+}
+
 dfn,
 cite,
 em,
