@@ -1,0 +1,78 @@
+section.resource-accordion {
+  background-color: $color__background-light;
+  padding-top: clamp(1rem, 8vw, 5rem);
+  padding-inline: clamp(1rem, 1.5rem, 3rem);
+  padding-bottom: 2rem;
+  .inner {
+    max-width: 80rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    details.accordion-item {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 30px;
+      summary {
+        font-family: $font__heading;
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        font-weight: 700;
+        cursor: pointer;
+        position: relative;
+        padding-right: 4rem;
+        display: flex;
+        flex-direction: row;
+        h2 {
+          flex: 1 1 auto;
+          margin: 0;
+          font-size: clamp(1.5rem, 4vw, 2.5rem);
+        }
+        .indicator {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 50px;
+          width: 50px;
+          border-radius: 50%;
+          background-color: $color__orange;
+          flex: 0 0 50px;
+          font-size: 3rem;
+          position: absolute;
+          right: 1rem;
+          z-index: 2;
+          &::after {
+            content: "+";
+            color: #fff;
+            font-weight: 700;
+          }
+        }
+      }
+      &[open] {
+        summary {
+          .indicator {
+            &::after {
+              content: "-";
+            }
+          }
+        }
+      }
+
+      .accordion-content {
+        display: flex;
+        gap: 2rem;
+        .content {
+          flex: 3;
+        }
+        .image {
+          flex: 2;
+          pointer-events: none;
+          img {
+            width: 100%;
+            height: auto;
+            transform: translateY(-60px);
+          }
+        }
+      }
+    }
+  }
+}

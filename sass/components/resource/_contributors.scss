@@ -1,0 +1,31 @@
+section.resource-contributors {
+  background-color: $color__background-light;
+  padding-inline: clamp(1rem, 5vw, 3rem);
+  padding-top: 3rem;
+  padding-bottom: 5rem;
+  .inner {
+    max-width: 80rem;
+    margin: 0 auto;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    flex-wrap: wrap;
+    p {
+      padding: 0;
+      margin: 0;
+    }
+    a.link {
+      color: $color__orange;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 2px solid $color__orange;
+      transition: all 0.3s ease;
+      &:hover {
+        color: darken($color__orange, 10%);
+        border-bottom-color: darken($color__orange, 10%);
+      }
+    }
+  }
+}

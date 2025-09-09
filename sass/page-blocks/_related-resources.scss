@@ -1,0 +1,178 @@
+.resource-grid,
+.related-resources {
+  padding-block: clamp(3rem, 5vw, 5rem);
+  padding-inline: clamp(1rem, 5vw, 3rem);
+  background-color: #fff;
+  .inner {
+    max-width: 80rem;
+    margin: 0 auto;
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+    }
+    .resource-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+      @media screen and (max-width: 1100px) {
+        grid-template-columns: 1fr;
+      }
+      .resource-card {
+        background-color: $color__background-light;
+        border-top: 12px solid $color__orange;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        align-items: center;
+        text-align: center;
+        padding: 2rem 1.5rem;
+        border-radius: 0 0 30px 30px;
+        h3 {
+          margin: 0;
+          grid-area: title;
+          font-size: 1.75rem;
+          line-height: 1.2;
+        }
+        p {
+          grid-area: description;
+        }
+        .links {
+          grid-area: links;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: .5rem;
+          margin-bottom: 2.5rem;
+          a {
+            font-family: $font__heading;
+            font-size: .875rem;
+            font-weight: 600;
+            border: 2px solid $color__text-main;
+            border-radius: 30px;
+            padding-inline: 1rem;
+            padding-block: .25rem;
+            text-decoration: none;
+            color: $color__text-main;
+            &:hover,
+            &:focus {
+              outline: none;
+              border-color: $color__orange;
+              background-color: $color__background-light;
+            }
+          }
+        }
+        a.show-all {
+          grid-area: show-all;
+          font-family: $font__heading;
+          font-size: .875rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-transform: uppercase;
+          text-decoration: none;
+          padding-block: .75rem;
+          gap: .5rem;
+          width: 100%;
+          background-color: $color__background-dark;
+          color: #fff;
+          transition: all .3s ease;
+          &:hover,
+          &:focus {
+            color: $color__orange;
+            svg {
+              transform: translateX(5px);
+            }
+          }
+
+          
+          svg {
+            max-width: 20px;
+            transition: all .3s ease;
+            g {
+              line,
+              polyline {
+                stroke: $color__orange;
+                fill: none;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-width: 2px;
+              }
+            }
+          }
+        }
+        @media screen and (max-width: 1100px) {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto auto auto;
+          gap: 2rem;
+          grid-template-areas:
+            "title links"
+            "description links"
+            "show-all show-all";
+        }
+
+        @media screen and (max-width: 600px) {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+          grid-template-areas:
+            "title"
+            "description"
+            "links"
+            "show-all";       
+        }
+
+      }
+      .card[data-theme="teal"] {
+        border-top-color: $color__teal;
+        .links {
+          a {
+            &:hover,
+            &:focus {
+              border-color: $color__teal;
+            }
+          }
+        }
+        a.show-all {
+          &:hover,
+          &:focus {
+            color: $color__teal;
+          }
+          svg {
+            transition: all .3s ease;
+            g {
+              line,
+              polyline {
+                stroke: $color__teal;
+              }
+            }
+          }
+        }
+      }
+      .card[data-theme="yellow"] {
+        border-top-color: $color__yellow;
+        .links {
+          a {
+            &:hover,
+            &:focus {
+              border-color: $color__yellow;
+            }
+          }
+        }
+        a.show-all {
+          &:hover,
+          &:focus {
+            color: $color__yellow;
+          }
+          svg {
+            g {
+              line,
+              polyline {
+                stroke: $color__yellow;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
