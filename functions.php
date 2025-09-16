@@ -144,8 +144,27 @@ function nexus_scripts() {
 	wp_enqueue_script( 'fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0/dist/fancybox/fancybox.umd.js', array('jquery'), null, true );
 	wp_enqueue_script( 'nexus-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
 	wp_enqueue_script( 'nexus-main', get_template_directory_uri() . '/js/main.js', array('jquery','fancybox'), _S_VERSION, true );
+	
+	// Enqueue resource filter handler on resource library pages
+	if ( is_page_template( 'template-resource-library.php' ) || is_post_type_archive( 'resource' ) ) {
+		wp_enqueue_script( 'resource-filter-handler', get_template_directory_uri() . '/js/resource-filter-handler.js', array('jquery'), _S_VERSION, true );
+		
+		// Localize script with AJAX URL and nonce
+		wp_localize_script( 'resource-filter-handler', 'resourceFilterData', array(
+			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			'nonce' => wp_create_nonce( 'resource_filter_nonce' )
+		) );
+	}
 }
 add_action( 'wp_enqueue_scripts', 'nexus_scripts' );
+
+/**
+ * Include AJAX handlers
+ */
+function nexus_include_ajax_handlers() {
+	require_once get_template_directory() . '/inc/ajax/resource-filter.php';
+}
+add_action( 'init', 'nexus_include_ajax_handlers' );
 
 /**
  * Enqueue editor styles
