@@ -56,8 +56,8 @@ class Resource_Filter_Ajax {
             'subject_matter' => array_map('sanitize_text_field', $_POST['subject_matter'] ?? []),
             'resource_type' => array_map('sanitize_text_field', $_POST['resource_type'] ?? []),
             'academic_standard' => array_map('sanitize_text_field', $_POST['academic_standard'] ?? []),
-            'grade_level_min' => intval($_POST['grade_level_min'] ?? -1),
-            'grade_level_max' => intval($_POST['grade_level_max'] ?? 12),
+            'grade_level_min' => sanitize_text_field($_POST['grade_level_min'] ?? '-1'),
+            'grade_level_max' => sanitize_text_field($_POST['grade_level_max'] ?? '12'),
             'sort_by' => sanitize_text_field($_POST['sort_by'] ?? 'newest'),
             'posts_per_page' => intval($_POST['posts_per_page'] ?? 12),
             'page' => intval($_POST['page'] ?? 1),
@@ -126,43 +126,71 @@ class Resource_Filter_Ajax {
     }
     
     /**
-     * Add grade range query using ACF fields
+     * Add grade range query using grade-level taxonomy
      */
     private function add_grade_range_query( &$args, $filters ) {
         $grade_min = $filters['grade_level_min'];
         $grade_max = $filters['grade_level_max'];
         
-        if ( empty( $grade_min ) && empty( $grade_max ) ) {
+        // Skip if values are empty (filters cleared) or default values
+        if ( empty( $grade_min ) || empty( $grade_max ) || 
+             ($grade_min === '-1' && $grade_max === '12') ) {
             return;
         }
         
-        // Convert grade slugs to numeric values for comparison
+        // Convert string values to numeric for comparison
         $min_numeric = $this->grade_slug_to_numeric( $grade_min );
         $max_numeric = $this->grade_slug_to_numeric( $grade_max );
         
-        $grade_meta_query = array( 'relation' => 'AND' );
-        
-        // Resources where minimum_grade <= selected_max AND maximum_grade >= selected_min
-        if ( $min_numeric !== null ) {
-            $grade_meta_query[] = array(
-                'key' => 'grade_range_maximum_grade',
-                'value' => $min_numeric,
-                'compare' => '>=',
-                'type' => 'NUMERIC'
-            );
+        // Skip if conversion failed or if it's the default range
+        if ( $min_numeric === null || $max_numeric === null || 
+             ($min_numeric === -1 && $max_numeric === 12) ) {
+            return;
         }
         
-        if ( $max_numeric !== null ) {
-            $grade_meta_query[] = array(
-                'key' => 'grade_range_minimum_grade',
-                'value' => $max_numeric,
-                'compare' => '<=',
-                'type' => 'NUMERIC'
-            );
+        // Build array of grade level slugs/terms to include
+        $grade_terms = array();
+        
+        // Handle the case where min and max are the same (single grade selection)
+        if ( $min_numeric === $max_numeric ) {
+            $grade_slug = $this->numeric_to_grade_slug( $min_numeric );
+            if ( $grade_slug ) {
+                $grade_terms[] = $grade_slug;
+            }
+        } else {
+            // Handle range selection
+            for ( $i = $min_numeric; $i <= $max_numeric; $i++ ) {
+                $grade_slug = $this->numeric_to_grade_slug( $i );
+                if ( $grade_slug ) {
+                    $grade_terms[] = $grade_slug;
+                }
+            }
         }
         
-        if ( count( $grade_meta_query ) > 1 ) {
-            $args['meta_query'][] = $grade_meta_query;
+        if ( ! empty( $grade_terms ) ) {
+            $args['tax_query'][] = array(
+                'taxonomy' => 'grade-level',
+                'field' => 'slug',
+                'terms' => $grade_terms,
+                'operator' => 'IN'
+            );
+        }
+    }
+    
+    /**
+     * Convert numeric grade value to slug
+     */
+    private function numeric_to_grade_slug( $numeric ) {
+        switch ( $numeric ) {
+            case -1:
+                return 'pk';
+            case 0:
+                return 'k';
+            default:
+                if ( $numeric >= 1 && $numeric <= 12 ) {
+                    return (string) $numeric;
+                }
+                return null;
         }
     }
     
@@ -170,14 +198,21 @@ class Resource_Filter_Ajax {
      * Convert grade slug to numeric value for ACF field comparison
      */
     private function grade_slug_to_numeric( $slug ) {
-        if ( empty( $slug ) ) {
+        if ( empty( $slug ) || $slug === '' ) {
             return null;
         }
         
-        switch ( strtolower( $slug ) ) {
+        // Handle both string and numeric inputs
+        $slug = strtolower( trim( $slug ) );
+        
+        switch ( $slug ) {
             case 'pk':
                 return -1;
             case 'k':
+                return 0;
+            case '-1':
+                return -1;
+            case '0':
                 return 0;
             default:
                 if ( is_numeric( $slug ) ) {
@@ -227,7 +262,6 @@ class Resource_Filter_Ajax {
         
         ob_start();
         
-        
         while ( $query->have_posts() ) {
             $query->the_post();
             
@@ -235,13 +269,12 @@ class Resource_Filter_Ajax {
             get_template_part( 'template-parts/cards/resource-card-detail' );
         }
         
-        
         // Reset post data
         wp_reset_postdata();
         
         return ob_get_clean();
     }
-    
+
     /**
      * Get pagination data
      */
