@@ -266,7 +266,7 @@ class Resource_Filter_Ajax {
             $query->the_post();
             
             // Use your existing resource card template
-            get_template_part( 'template-parts/cards/resource-card-detail' );
+            get_template_part( 'template-parts/cards/resource-card-detail', null, array( 'article' => get_post() ) );
         }
         
         // Reset post data

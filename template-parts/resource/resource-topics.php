@@ -40,7 +40,9 @@ if ( $terms && ! is_wp_error( $terms ) ) {
     $topicString = rtrim( $topicString, ', ' );
 
 }?>
+<?php if ( isset( $topicString ) && ! empty( $topicString ) ): ?>
 <div class="resource-topics">
   <span class="label">Topics:</span>
   <?php echo $topicString; ?>
 </div>
+<?php endif; ?>

@@ -21,12 +21,14 @@ if ( $primary_type ) {
 }
 
 $resource_type_children = null;
- // loop through all terms ignoring all parents 
- foreach ( $resource_type as $type ) {
-   if ( $type->parent != 0 ) {
-     $resource_type_children[] = $type;
-   }
- }
+// loop through all terms ignoring all parents 
+if ( $resource_type && ! is_wp_error( $resource_type ) ) {
+  foreach ( $resource_type as $type ) {
+    if ( $type->parent != 0 ) {
+      $resource_type_children[] = $type;
+    }
+  }
+}
 ?>
 <article class="resource-card resource-card-detail" aria-labelledby="resource-title-<?php echo esc_attr( $article->ID ); ?>" data-resource-type="<?php echo esc_attr( $type_slug ); ?>">
   <a href="<?php echo get_permalink( $article->ID ); ?>">
