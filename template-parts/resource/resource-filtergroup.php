@@ -157,8 +157,23 @@ $standards_flat = get_terms( array(
 $standards = build_term_hierarchy( $standards_flat );
 ?>
 
-<section class="resource-filtergroup" role="search" aria-labelledby="filter-heading">
-  <h2 id="filter-heading" class="text-label">Search & Filter</h2>
+<section id="resource-filtergroup" class="resource-filtergroup" role="search" aria-labelledby="filter-heading" aria-expanded="false">
+  <h2 id="filter-heading" class="text-label visually-hidden">Search & Filter</h2>
+  <button class="toggle-filters filter-visibility-toggle" aria-expanded="false" title="Show or hide resource filters">
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <g>
+        <path d="M28,9H11a1,1,0,0,1,0-2H28a1,1,0,0,1,0,2Z"/>
+        <path d="M7,9H4A1,1,0,0,1,4,7H7A1,1,0,0,1,7,9Z"/>
+        <path d="M21,17H4a1,1,0,0,1,0-2H21a1,1,0,0,1,0,2Z"/>
+        <path d="M11,25H4a1,1,0,0,1,0-2h7a1,1,0,0,1,0,2Z"/>
+        <path d="M9,11a3,3,0,1,1,3-3A3,3,0,0,1,9,11ZM9,7a1,1,0,1,0,1,1A1,1,0,0,0,9,7Z"/>
+        <path d="M23,19a3,3,0,1,1,3-3A3,3,0,0,1,23,19Zm0-4a1,1,0,1,0,1,1A1,1,0,0,0,23,15Z"/>
+        <path d="M13,27a3,3,0,1,1,3-3A3,3,0,0,1,13,27Zm0-4a1,1,0,1,0,1,1A1,1,0,0,0,13,23Z"/>
+        <path d="M28,17H25a1,1,0,0,1,0-2h3a1,1,0,0,1,0,2Z"/>
+        <path d="M28,25H15a1,1,0,0,1,0-2H28a1,1,0,0,1,0,2Z"/>
+      </g>
+    </svg>
+  </button>
 
   <form action="" id="resource-filters" method="get" role="form" aria-label="Filter resources" data-posts-per-page="<?php echo esc_attr( $posts_per_page ); ?>">
     

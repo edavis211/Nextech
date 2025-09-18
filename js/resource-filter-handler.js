@@ -8,6 +8,9 @@ class ResourceFilterHandler {
     this.form = document.getElementById('resource-filters');
     this.container = document.querySelector('.resource-filtergroup');
     this.resultsContainer = document.querySelector('#resource-results-container');
+    this.sortSelect = document.getElementById('sort-by'); // Add sort selector
+    this.filterToggleButtons = document.querySelectorAll('.filter-visibility-toggle'); // Changed to class selector for multiple buttons
+    this.filterSection = document.getElementById('resource-filtergroup'); // Add filter section
     this.debounceTimer = null;
     this.debounceDelay = 300; // ms
     
@@ -35,6 +38,7 @@ class ResourceFilterHandler {
     
     this.createLoadingIndicator();
     this.initializeGradeSlider();
+    this.setInitialFilterVisibility();
     this.bindEvents();
     this.initializeFromURL();
     this.initializeInfiniteScroll();
@@ -97,6 +101,14 @@ class ResourceFilterHandler {
       });
     }
     
+    // Sort dropdown
+    if (this.sortSelect) {
+      this.sortSelect.addEventListener('change', () => {
+        this.updateSelectedFilters();
+        this.debouncedFilter();
+      });
+    }
+    
     // Taxonomy checkboxes
     const checkboxes = this.form.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
@@ -113,6 +125,29 @@ class ResourceFilterHandler {
         this.clearAllFilters();
       });
     }
+    
+    // Event delegation for dynamically created clear filters button in no-results message
+    if (this.resultsContainer) {
+      this.resultsContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('clear-filters-btn')) {
+          this.clearAllFilters();
+        }
+      });
+    }
+    
+    // Filter visibility toggle buttons (multiple buttons support)
+    if (this.filterToggleButtons.length > 0 && this.filterSection) {
+      this.filterToggleButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          this.toggleFilterVisibility();
+        });
+      });
+    }
+    
+    // Handle resize events to reset visibility on screen size change
+    window.addEventListener('resize', () => {
+      this.handleResize();
+    });
     
     // Form submission (prevent default, handle via AJAX)
     this.form.addEventListener('submit', (e) => {
@@ -208,8 +243,8 @@ class ResourceFilterHandler {
       to right,
       #ddd 0%,
       #ddd ${minPercent}%,
-      #007cba ${minPercent}%,
-      #007cba ${maxPercent}%,
+      #e98300 ${minPercent}%,
+      #e98300 ${maxPercent}%,
       #ddd ${maxPercent}%,
       #ddd 100%
     )`;
@@ -260,6 +295,7 @@ class ResourceFilterHandler {
       grade_level_min: gradeMin,
       grade_level_max: gradeMax,
       academic_standard: formData.getAll('filter-standard[]'),
+      sort_by: this.sortSelect ? this.sortSelect.value : 'newest', // Add sort option
       posts_per_page: this.postsPerPage,
       page: this.currentPage,
       action: 'filter_resources',
@@ -288,6 +324,7 @@ class ResourceFilterHandler {
       formData.append('search', filterData.search);
       formData.append('grade_level_min', filterData.grade_level_min);
       formData.append('grade_level_max', filterData.grade_level_max);
+      formData.append('sort_by', filterData.sort_by); // Add sort parameter
       formData.append('posts_per_page', this.postsPerPage);
       formData.append('page', 1); // Always start at page 1 for new filters
       formData.append('action', filterData.action);
@@ -497,6 +534,81 @@ class ResourceFilterHandler {
     // Update displays
     this.updateSelectedFilters();
     this.performFilter();
+  }
+
+  /**
+   * Toggle filter visibility
+   */
+  toggleFilterVisibility() {
+    if (this.filterToggleButtons.length === 0 || !this.filterSection) return;
+    
+    // Get current state from the first button (they should all be in sync)
+    const isExpanded = this.filterToggleButtons[0].getAttribute('aria-expanded') === 'true';
+    const newState = !isExpanded;
+    
+    // Update all toggle buttons
+    this.filterToggleButtons.forEach(button => {
+      button.setAttribute('aria-expanded', newState.toString());
+      
+      // Update button text for screen readers
+      const buttonText = button.querySelector('.visually-hidden');
+      if (buttonText) {
+        buttonText.textContent = newState ? 'Hide Filters' : 'Show Filters';
+      }
+      
+      // Update button title
+      button.setAttribute('title', newState ? 'Hide resource filters' : 'Show resource filters');
+    });
+    
+    // Update section aria-expanded
+    this.filterSection.setAttribute('aria-expanded', newState.toString());
+    
+    // Update body data attribute
+    document.body.setAttribute('data-filters-expanded', newState.toString());
+  }
+
+  /**
+   * Set initial filter visibility based on screen size
+   */
+  setInitialFilterVisibility() {
+    if (this.filterToggleButtons.length === 0 || !this.filterSection) return;
+    
+    // Check if mobile or tablet
+    const isMobile = window.innerWidth < 1200;
+    
+    // Set initial state: expanded on desktop, collapsed on mobile
+    const initialState = !isMobile;
+    
+    // Update all toggle buttons
+    this.filterToggleButtons.forEach(button => {
+      button.setAttribute('aria-expanded', initialState.toString());
+      
+      // Update button text
+      const buttonText = button.querySelector('.visually-hidden');
+      if (buttonText) {
+        buttonText.textContent = initialState ? 'Hide Filters' : 'Show Filters';
+      }
+      
+      // Update button title
+      button.setAttribute('title', initialState ? 'Hide resource filters' : 'Show resource filters');
+    });
+    
+    // Update section aria-expanded
+    this.filterSection.setAttribute('aria-expanded', initialState.toString());
+    
+    // Update body data attribute
+    document.body.setAttribute('data-filters-expanded', initialState.toString());
+  }
+
+  /**
+   * Handle window resize to adjust filter visibility
+   */
+  handleResize() {
+    // Debounce resize events
+    clearTimeout(this.resizeTimer);
+    this.resizeTimer = setTimeout(() => {
+      this.setInitialFilterVisibility();
+    }, 150);
   }
   
   /**

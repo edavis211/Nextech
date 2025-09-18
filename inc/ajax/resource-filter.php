@@ -58,6 +58,7 @@ class Resource_Filter_Ajax {
             'academic_standard' => array_map('sanitize_text_field', $_POST['academic_standard'] ?? []),
             'grade_level_min' => intval($_POST['grade_level_min'] ?? -1),
             'grade_level_max' => intval($_POST['grade_level_max'] ?? 12),
+            'sort_by' => sanitize_text_field($_POST['sort_by'] ?? 'newest'),
             'posts_per_page' => intval($_POST['posts_per_page'] ?? 12),
             'page' => intval($_POST['page'] ?? 1),
         ];
@@ -86,6 +87,9 @@ class Resource_Filter_Ajax {
         
         // Grade range query (ACF fields)
         $this->add_grade_range_query( $args, $filters );
+        
+        // Add sorting
+        $this->add_sorting( $args, $filters );
         
         // Set relation for multiple queries
         if ( count( $args['tax_query'] ) > 1 ) {
@@ -184,11 +188,41 @@ class Resource_Filter_Ajax {
     }
     
     /**
+     * Add sorting to query arguments
+     */
+    private function add_sorting( &$args, $filters ) {
+        $sort_by = $filters['sort_by'] ?? 'newest';
+        
+        switch ( $sort_by ) {
+            case 'oldest':
+                $args['orderby'] = 'date';
+                $args['order'] = 'ASC';
+                break;
+            case 'a-z':
+                $args['orderby'] = 'title';
+                $args['order'] = 'ASC';
+                break;
+            case 'z-a':
+                $args['orderby'] = 'title';
+                $args['order'] = 'DESC';
+                break;
+            case 'newest':
+            default:
+                $args['orderby'] = 'date';
+                $args['order'] = 'DESC';
+                break;
+        }
+    }
+
+    /**
      * Render resources HTML
      */
     private function render_resources( $query ) {
         if ( ! $query->have_posts() ) {
-            return '<div class="no-resources-found"><p>No resources found matching your criteria.</p></div>';
+            return '<div class="no-resources-found">
+                        <p>No resources found matching your criteria.</p>
+                        <button type="button" class="clear-filters-btn" aria-label="Clear all filters">Clear Filters</button>
+                    </div>';
         }
         
         ob_start();
@@ -198,7 +232,7 @@ class Resource_Filter_Ajax {
             $query->the_post();
             
             // Use your existing resource card template
-            get_template_part( 'template-parts/cards/resource-card' );
+            get_template_part( 'template-parts/cards/resource-card-detail' );
         }
         
         

@@ -3,9 +3,56 @@
   flex-shrink: 0;
   flex-grow: 0;
   background-color: transparent;
-  position: sticky;
-  top: 0;
   height: fit-content;
+  position: relative;
+  background-color: $color__background-light;
+
+  button.filter-visibility-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-left: auto;
+    @media (min-width: 1200px) {
+      display: none; // Hide toggle on desktop
+    }
+    @media (max-width: 1199px) {
+      display: block; // Show toggle on mobile
+    }
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      path {
+        fill: $color__text-main;
+      }
+    }
+  }
+
+  
+  @media (max-width: 1200px) {
+    &[aria-expanded="false"] {
+      display: none;
+    }
+    &[aria-expanded="true"] {
+      display: block;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1000;
+      padding: 1rem 0 3rem;
+      border: 0;
+      border-top: 2px solid $color__background-black;
+      
+      form {
+        overflow: auto;
+        height: 100%;
+        border: none !important;
+      }
+    }
+  }
   h2 {
     margin-top: 0;
     margin-bottom: 1rem;
@@ -21,11 +68,12 @@
       flex-direction: row-reverse;
       align-items: center;
       justify-content: center;
-      margin-block: 3rem;
+      margin-block: clamp(1rem, 3vw, 3rem);
       margin-inline: 2rem;
       padding: .5rem;
       background-color: white;
       border-radius: 30px;
+      background-color: #fff;
       label {
         width: 3.125rem;
         height: 3.125rem;
@@ -415,6 +463,45 @@
   border-radius: 4px;
   margin-bottom: 1rem;
   display: none;
+}
+
+// No results message styles
+.no-resources-found {
+  text-align: center;
+  padding: 3rem 2rem;
+  background-color: $color__background-light;
+  border-radius: 8px;
+  margin: 2rem 0;
+  
+  p {
+    font-size: 1.125rem;
+    color: $color__text-main;
+    margin-bottom: 1.5rem;
+  }
+  
+  .clear-filters-btn {
+    background-color: $color__background-black;
+    color: white;
+    font-family: $font__heading;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    
+    &:hover,
+    &:focus {
+      background-color: darken($color__background-black, 10%);
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+    }
+    
+    &:focus-visible {
+      outline: 2px solid $color__background-black;
+    }
+  }
 }
 
 // Results transition
