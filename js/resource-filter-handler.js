@@ -401,23 +401,10 @@ class ResourceFilterHandler {
       }
     }
     
-    // Scroll to top of results after content update
-    this.scrollToResults();
-    
     // Trigger custom event for other scripts
     document.dispatchEvent(new CustomEvent('resourcesFiltered', {
       detail: { data, filters: this.getFilterData() }
     }));
-  }
-
-  /**
-   * Scroll to the top of the page
-   */
-  scrollToResults() {
-    window.scrollTo({ 
-      top: 0, 
-      behavior: 'smooth' 
-    });
   }
   
   /**

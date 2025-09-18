@@ -131,6 +131,26 @@ body.page-template-template-resource-library {
           width: 100%;
           flex-grow: 1;
 
+          @media screen and (min-width: 1200px) {
+            max-width: 70rem;
+          }
+
+          .filter-loading {
+            background-color: transparent;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            padding: 2rem 0;
+            font-size: 2rem;
+            font-family: $font__heading;
+            text-transform: uppercase;
+            width: 100%;
+            color: #000;
+          }
+
           .resource-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
