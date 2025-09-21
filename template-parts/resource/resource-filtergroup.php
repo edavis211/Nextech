@@ -3,6 +3,8 @@
 
 // Get posts per page from passed args, fallback to default
 $posts_per_page = $args['posts_per_page'] ?? 12;
+$results_count_string = $args['results_count_string'] ?? '';
+$total_published = $args['total_published'] ?? null;
 
 // Function to build hierarchical term tree
 function build_term_hierarchy( $terms, $parent_id = 0 ) {
@@ -205,7 +207,7 @@ $standards = build_term_hierarchy( $standards_flat );
     </div>
     
     <div class="clear-filters-action">
-      <button type="button" id="clear-filters" aria-label="Clear all selected filters">Clear Filters</button>
+      <button type="button" class="clear-filters" aria-label="Clear all selected filters">Clear Filters</button>
     </div>
     
     <fieldset class="filter-group">
@@ -249,7 +251,8 @@ $standards = build_term_hierarchy( $standards_flat );
     </fieldset>
     
     <div class="filter-actions">
-      <button type="submit" class="btn btn-primary">Show Results</button>
+      <button type="button" class="clear-filters" aria-label="Clear all selected filters" hidden>Clear Filters</button>
+      <button id="show-results" type="submit" class="btn btn-primary">Show <?= $total_published ?> Results</button>
     </div>
     
   </form>

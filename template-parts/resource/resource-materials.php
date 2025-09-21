@@ -1,85 +1,189 @@
 <?php 
+/**
+ * Resource Materials Template Part
+ * 
+ * Displays materials associated with a resource including PDFs, websites, videos, and Google Docs.
+ * Each material has contextual actions (preview, download, copy link, etc.)
+ */
+
 $materials = get_field('materials');
-/*
-Array ( [0] => Array ( [title] => Coding Book Covers Module on Code.org [material_type] => website [link] => https://nextech.org/ [file] => [note] => ) [1] => Array ( [title] => Planning Your Book Cover Handout [material_type] => pdf [link] => [file] => Array ( [ID] => 104 [id] => 104 [title] => WBL Menu of Experiences _8_1_2025 [filename] => WBL-Menu-of-Experiences-_8_1_2025.pdf [filesize] => 2138548 [url] => https://nexus.local/wp-content/uploads/2025/09/WBL-Menu-of-Experiences-_8_1_2025.pdf [link] => https://nexus.local/resource/random-ai-report-book-test/wbl-menu-of-experiences-_8_1_2025/ [alt] => [author] => 4 [description] => [caption] => [name] => wbl-menu-of-experiences-_8_1_2025 [status] => inherit [uploaded_to] => 103 [date] => 2025-09-05 17:54:48 [modified] => 2025-09-05 17:54:48 [menu_order] => 0 [mime_type] => application/pdf [type] => application [subtype] => pdf [icon] => https://nexus.local/wp-includes/images/media/document.png ) [note] => ) )
-*/
+
+if ( ! $materials ) {
+    return;
+}
+
+/**
+ * Get material configuration based on type
+ * 
+ * @param string $type Material type (pdf, website, video, google_slides, google_doc, google_sheet)
+ * @return array Configuration array with icon and actions
+ */
+function get_material_config( $type ) {
+    $configs = [
+        'pdf' => [
+            'icon' => 'pdf',
+            'actions' => [
+                'primary' => [ 'text' => 'Preview', 'icon' => 'preview-link' ],
+                'secondary' => [ 'text' => 'Download PDF', 'icon' => 'download' ]
+            ]
+        ],
+        'website' => [
+            'icon' => 'website',
+            'actions' => [
+                'primary' => [ 'text' => 'Copy Link', 'icon' => 'copy-link' ],
+                'secondary' => [ 'text' => 'Open Link', 'icon' => 'external-link' ]
+            ]
+        ],
+        'video' => [
+            'icon' => 'website', // Using website icon as fallback
+            'actions' => [
+                'primary' => [ 'text' => 'Copy Link', 'icon' => 'copy-link' ],
+                'secondary' => [ 'text' => 'Watch Video', 'icon' => 'external-link' ]
+            ]
+        ],
+        'google_slides' => [
+            'icon' => 'website',
+            'actions' => [
+                'primary' => [ 'text' => 'Copy Link', 'icon' => 'copy-link' ],
+                'secondary' => [ 'text' => 'Open Slides', 'icon' => 'external-link' ]
+            ]
+        ],
+        'google_doc' => [
+            'icon' => 'website',
+            'actions' => [
+                'primary' => [ 'text' => 'Copy Link', 'icon' => 'copy-link' ],
+                'secondary' => [ 'text' => 'Open Document', 'icon' => 'external-link' ]
+            ]
+        ],
+        'google_sheet' => [
+            'icon' => 'website',
+            'actions' => [
+                'primary' => [ 'text' => 'Copy Link', 'icon' => 'copy-link' ],
+                'secondary' => [ 'text' => 'Open Sheet', 'icon' => 'external-link' ]
+            ]
+        ]
+    ];
+
+    return $configs[ $type ] ?? $configs['website']; // Default to website config
+}
+
+/**
+ * Build action array for material
+ * 
+ * @param array $material Material data
+ * @param array $action_config Action configuration
+ * @param string $action_type 'primary' or 'secondary'
+ * @return array Action array with url, text, icon, and target
+ */
+function build_material_action( $material, $action_config, $action_type ) {
+    $type = $material['material_type'];
+    $is_pdf = ( $type === 'pdf' );
+    $url = $is_pdf ? $material['file']['url'] ?? '#' : $material['link'] ?? '#';
+    
+    $action = [
+        'text' => $action_config['text'],
+        'url' => $url,
+        'icon' => $action_config['icon'],
+        'target' => '_blank'
+    ];
+
+    // Special handling for copy link actions
+    if ( strpos( $action_config['icon'], 'copy' ) !== false ) {
+        $action['data_copy_url'] = $url;
+    }
+
+    // Add download attribute for PDF download actions
+    if ( $is_pdf && strpos( $action_config['icon'], 'download' ) !== false ) {
+        $action['download'] = true;
+    }
+
+    return $action;
+}
+
+/**
+ * Render material icon
+ * 
+ * @param string $icon_type Icon type to render
+ */
+function render_material_icon( $icon_type ) {
+    $icon_path = "template-parts/icons/{$icon_type}";
+    if ( locate_template( $icon_path . '.php' ) ) {
+        get_template_part( $icon_path );
+    }
+}
+
+/**
+ * Render action button
+ * 
+ * @param array $action Action data array
+ */
+function render_action_button( $action ) {
+    $target_attr = ! empty( $action['target'] ) ? 'target="' . esc_attr( $action['target'] ) . '"' : '';
+    $copy_attr = ! empty( $action['data_copy_url'] ) ? 'data-copy-url="' . esc_attr( $action['data_copy_url'] ) . '"' : '';
+    $download_attr = ! empty( $action['download'] ) ? 'download' : '';
+    ?>
+    <a href="<?php echo esc_url( $action['url'] ); ?>" 
+       class="button" 
+       <?php echo $target_attr; ?> 
+       <?php echo $copy_attr; ?>
+       <?php echo $download_attr; ?>>
+        <?php if ( ! empty( $action['icon'] ) ) : ?>
+            <span class="icon icon-<?php echo esc_attr( $action['icon'] ); ?>">
+                <?php render_material_icon( $action['icon'] ); ?>
+            </span>
+        <?php endif; ?>
+        <?php echo esc_html( $action['text'] ); ?>
+    </a>
+    <?php
+}
+
 ?>
 <section class="resource-materials">
-  <div class="inner">
-    <h2>Materials</h2>
-    <ul class="materials-list">
-      <?php foreach($materials as $material): 
-        $title = $material['title'];
-        $type = $material['material_type'];
-        $link = $material['link'];
-        $file = $material['file'];
-        $note = $material['note'];
-
-
-        if( $type == 'website' && $link ):
-          $url = $link;
-          $target = '_blank';
-          $action1 = [
-            'text' => 'Copy Link',
-            'url' => $link,
-            'icon' => 'copy',
-          ];
-          $action2 = [
-            'text' => 'Open Link',
-            'url' => $link,
-            'icon' => 'external-link',
-            'target' => '_blank',
-          ];
-        elseif( $type == 'pdf' && $file ):
-          $url = $file['url'];
-          $target = '_blank';
-          $action1 = [
-            'text' => 'Preview',
-            'url' => $file['url'],
-            'icon' => 'preview',
-            'target' => '_blank',
-          ];
-          $action2 = [
-            'text' => 'Download PDF',
-            'url' => $file['url'],
-            'icon' => 'download',
-            'target' => '_blank',
-          ];
-        else:
-          $url = '#';
-          $target = '';
-        endif;
-      ?>
-      <li class="material-item material-<?php echo esc_html($type); ?>">
-        <span class="material-icon">
-          <?php if( $type == 'website' ) : ?>
-            <?php echo get_template_part('template-parts/icons/website'); ?>
-          <?php elseif( $type == 'pdf' ) : ?>
-            <?php echo get_template_part('template-parts/icons/pdf'); ?>
-          <?php else : ?>
-            <?php echo ''; ?>
-          <?php endif; ?>
-        </span>
-        <h3><?php echo esc_html($title); ?></h3>
-        <div class="material-actions">
-          <a href="<?php echo esc_url($action1['url']); ?>" class="button" <?php if( isset($action1['target']) ) echo 'target="'.esc_attr($action1['target']).'"'; ?>>
-            <?php if( isset($action1['icon']) ) : ?>
-              <span class="icon icon-<?php echo esc_attr($action1['icon']); ?>"></span>
-            <?php endif; ?>
-            <?php echo esc_html($action1['text']); ?>
-          </a>
-          <a href="<?php echo esc_url($action2['url']); ?>" class="button" <?php if( isset($action2['target']) ) echo 'target="'.esc_attr($action2['target']).'"'; ?>>
-            <?php if( isset($action2['icon']) ) : ?>
-              <span class="icon icon-<?php echo esc_attr($action2['icon']); ?>"></span>
-            <?php endif; ?>
-            <?php echo esc_html($action2['text']); ?>
-          </a>
-        </div>
-        <?php if( $note ): ?>
-          <p class="material-note"><?php echo esc_html($note); ?></p>
-        <?php endif; ?>
-      </li>
-      <?php endforeach; ?>
-    </ul>
-  </div>
+    <div class="inner">
+        <h2>Materials</h2>
+        <ul class="materials-list">
+            <?php foreach ( $materials as $material ) : 
+                $title = $material['title'] ?? '';
+                $type = $material['material_type'] ?? 'website';
+                $note = $material['note'] ?? '';
+                
+                // Skip if no title or invalid data
+                if ( empty( $title ) ) {
+                    continue;
+                }
+                
+                // Get configuration for this material type
+                $config = get_material_config( $type );
+                
+                // Build actions
+                $action1 = build_material_action( $material, $config['actions']['primary'], 'primary' );
+                $action2 = build_material_action( $material, $config['actions']['secondary'], 'secondary' );
+                
+                // Skip if no valid URL for actions
+                if ( $action1['url'] === '#' && $action2['url'] === '#' ) {
+                    continue;
+                }
+            ?>
+            <li class="material-item material-<?php echo esc_attr( $type ); ?>">
+                <span class="material-icon">
+                    <?php render_material_icon( $config['icon'] ); ?>
+                </span>
+                
+                <div class="text-wrap">
+                  <h3><?php echo esc_html( $title ); ?></h3>
+                  <?php if ( ! empty( $note ) ) : ?>
+                    <p class="material-note"><?php echo esc_html( $note ); ?></p>
+                  <?php endif; ?>
+                </div>
+                
+                <div class="material-actions">
+                    <?php 
+                    render_action_button( $action1 );
+                    render_action_button( $action2 );
+                    ?>
+                </div>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
 </section>

@@ -1,4 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22.04 26">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+
   <g>
     <polygon class="cls-1" points="15.71 1 4.61 1 4.61 21.45 21.04 21.45 21.04 5.9 15.71 1"/>
     <path class="cls-1" d="M4.6,4.55H1v20.45h16.42v-3.26"/>

@@ -1,7 +1,7 @@
 body.page-template-template-resource-library {
   main.page-resource-library {
     background-color: $color__background-light;
-    padding-block: 5rem;
+    padding-block: 3rem;
     padding-inline: clamp(1rem, 3vw, 4rem);
     @media screen and (max-width: 600px) {
       padding-inline: 10px;

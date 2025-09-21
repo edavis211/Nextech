@@ -6,6 +6,8 @@
 class ResourceFilterHandler {
   constructor() {
     this.form = document.getElementById('resource-filters');
+    this.infoBar = document.querySelector('#resource-info-bar');
+    this.resultsCount = document.getElementById('resource-results-count');
     this.container = document.querySelector('.resource-filtergroup');
     this.resultsContainer = document.querySelector('#resource-results-container');
     this.sortSelect = document.getElementById('sort-by'); // Add sort selector
@@ -119,12 +121,12 @@ class ResourceFilterHandler {
     });
     
     // Clear filters button
-    const clearButton = document.getElementById('clear-filters');
-    if (clearButton) {
-      clearButton.addEventListener('click', () => {
+    const clearFiltersButtons = this.form.querySelectorAll('.clear-filters');
+    clearFiltersButtons.forEach(button => {
+      button.addEventListener('click', () => {
         this.clearAllFilters();
       });
-    }
+    });
     
     // Event delegation for dynamically created clear filters button in no-results message
     if (this.resultsContainer) {
@@ -153,6 +155,35 @@ class ResourceFilterHandler {
     this.form.addEventListener('submit', (e) => {
       e.preventDefault();
       this.performFilter();
+
+      // Close filters on mobile after submit
+      if (window.innerWidth < 1200 && this.filterSection) {
+        this.filterSection.setAttribute('aria-expanded', 'false');
+        document.body.setAttribute('data-filters-expanded', 'false');
+        this.filterToggleButtons.forEach(button => {
+          button.setAttribute('aria-expanded', 'false');
+          const buttonText = button.querySelector('.visually-hidden');
+          if (buttonText) buttonText.textContent = 'Show Filters';
+          button.setAttribute('title', 'Show resource filters');
+        });
+      }
+
+      // Scroll to main#primary on filter submit
+      // const primarySection = document.getElementById('primary');
+      // if (primarySection) {
+      //   primarySection.scrollIntoView({ behavior: 'smooth' });
+      // }
+
+      // Focus results count for accessibility
+      if (this.resultsCount) {
+        this.resultsCount.focus();
+      }
+      //scroll to H1 
+      const h1 = document.querySelector('main#primary h1');
+      if (h1) {
+        h1.scrollIntoView({ behavior: 'smooth' });
+      }
+
     });
   }
   

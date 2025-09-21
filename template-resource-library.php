@@ -20,6 +20,7 @@ $resources = get_posts( array(
 // Get total count for proper pagination
 $total_resources = wp_count_posts('resource');
 $total_published = $total_resources->publish;
+$results_count_string = $total_published === 1 ? 'Showing 1 of 1 resource' : "Showing {$posts_per_page} of {$total_published} resources";
 ?>
 
 	<main id="primary" class="site-main page-resource-library">
@@ -30,7 +31,7 @@ $total_published = $total_resources->publish;
 				</header><!-- .entry-header -->
 			<?php endwhile; ?>
 
-			<section class="info-bar">
+			<section id="resource-info-bar" class="info-bar">
 				<div class="resource-results">
 					<form action="" class="sort-choices">
 						<label for="sort-by" class="text-label">Sort by:</label>
@@ -41,16 +42,9 @@ $total_published = $total_resources->publish;
 							<option value="z-a">Z-A</option>
 						</select>
 					</form>
-					<div class="results-count">
-						<?php
-						$count = count( $resources );
-						if ( $count === 1 ) {
-							echo 'Showing 1 of ' . $total_published . ' resources';
-						} else {
-							echo 'Showing ' . $count . ' of ' . $total_published . ' resources';
-						}
-						?>
-					</div>
+					<h2 id="resource-results-count" class="results-count" tabindex="0">
+						<?=$results_count_string?>
+					</h2>
 				</div>
 				<div class="filter-visibility-wrap">
 					<div class="text-label">
@@ -82,7 +76,7 @@ $total_published = $total_resources->publish;
 						<?php endforeach; ?>
 					</div>
 				</section>
-				<?php get_template_part( 'template-parts/resource/resource-filtergroup', null, array( 'posts_per_page' => $posts_per_page ) ); ?>
+				<?php get_template_part( 'template-parts/resource/resource-filtergroup', null, array( 'posts_per_page' => $posts_per_page, 'results_count_string' => $results_count_string, 'total_published' => $total_published ) ); ?>
 			</div>
 		</div>
 	</main><!-- #main -->
