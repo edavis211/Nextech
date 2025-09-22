@@ -42,7 +42,7 @@ if ( $terms && ! is_wp_error( $terms ) ) {
 }?>
 <?php if ( isset( $topicString ) && ! empty( $topicString ) ): ?>
 <div class="resource-topics">
-  <span class="label">Topics:</span>
+  <span class="label">Subject Matter:</span>
   <?php echo $topicString; ?>
 </div>
 <?php endif; ?>

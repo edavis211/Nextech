@@ -51,6 +51,7 @@ article.resource-card-detail {
     color: inherit;
   }
   .resource-types {
+    text-transform: capitalize;
     display: flex;
     gap: .5rem;
     flex-wrap: wrap;
@@ -97,7 +98,7 @@ article.resource-card-detail {
     color: $color__background-dark;
     .label {
       font-weight: 600;
-      margin-right: .5rem;
+      margin-right: .25rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       font-size: .75rem;

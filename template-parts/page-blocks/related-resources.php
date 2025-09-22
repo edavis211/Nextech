@@ -7,7 +7,9 @@ if( $related_resources && is_array( $related_resources ) && count( $related_reso
     <div class="resource-cards">
       <?php foreach( $related_resources as $resource ): ?>
         <?php $article = $resource['resource']; ?>
-        <?php get_template_part( 'template-parts/cards/resource-card', null, array( 'article' => $article ) ); ?>
+        <?php if( isset($article) && !empty($article) && isset($article->ID) ): ?>
+          <?php get_template_part( 'template-parts/cards/resource-card', null, array( 'article' => $article ) ); ?>
+        <?php endif; ?>
       <?php endforeach; ?>
     </div>
   </div>
