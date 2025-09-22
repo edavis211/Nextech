@@ -1,11 +1,23 @@
 article.resource-card-detail {
   --color-theme: #e98300;
-  &[data-resource-type="classroom-tools"] {
-    --color-theme:#55d4e5;
+  &[data-post-type="resource"]{
+    &[data-resource-type="classroom-tools"] {
+      --color-theme:#e98300;
+    }
+    &[data-resource-type="lesson-activity-plans"] {
+      --color-theme: #55d4e5;
+    }
   }
-  &[data-resource-type="lesson-activity-plans"] {
-    --color-theme: #5454ef;
+
+  &[data-post-type="topic"]{
+    &[data-group-type="course"] {
+      --color-theme: #5454ef;
+    }
+    &[data-group-type="topic"] {
+      --color-theme: #e2d313;
+    }
   }
+
   border-top: .75rem solid var(--color-theme);
   padding-top: 2rem;
   padding-bottom: 1.25rem;

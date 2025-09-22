@@ -9,21 +9,33 @@ get_header();
 // Get posts per page setting from filter group
 $posts_per_page = 12; // Should match the setting in resource-filtergroup.php
 
+$page_template = get_page_template_slug( get_queried_object_id() );
+$page_slug = get_post_field( 'post_name', get_queried_object_id() );
+$queried_post_types = array('resource', 'topic');
+if ($page_slug === 'topics') {
+		$queried_post_types = array('topic');
+}
+
 $resources = get_posts( array(
-	'post_type'      => 'resource',
+	'post_type'      => $queried_post_types, // Include both post types
 	'posts_per_page' => $posts_per_page, // Use configurable setting instead of -1
 	'post_status'    => 'publish',
 	'orderby'        => 'title',
 	'order'          => 'ASC',
 ) );
 
-// Get total count for proper pagination
+// Get total count for proper pagination - include both post types
 $total_resources = wp_count_posts('resource');
-$total_published = $total_resources->publish;
-$results_count_string = $total_published === 1 ? 'Showing 1 of 1 resource' : "Showing {$posts_per_page} of {$total_published} resources";
+$total_topics = wp_count_posts('topic');
+$total_published = $total_resources->publish + $total_topics->publish;
+$results_count_string = $total_published === 1 ? 'Showing 1 of 1 item' : "Showing {$posts_per_page} of {$total_published} items";
 ?>
 
-	<main id="primary" class="site-main page-resource-library">
+	<main id="primary" 
+		class="site-main page-resource-library" 
+		data-page-template="<?php echo esc_attr( $page_template ); ?>"
+		data-page-slug="<?php echo esc_attr( $page_slug ); ?>"
+		>
 		<div class="inner">
 			<?php while ( have_posts() ) : the_post();?>
 				<header class="entry-header">
@@ -76,7 +88,7 @@ $results_count_string = $total_published === 1 ? 'Showing 1 of 1 resource' : "Sh
 						<?php endforeach; ?>
 					</div>
 				</section>
-				<?php get_template_part( 'template-parts/resource/resource-filtergroup', null, array( 'posts_per_page' => $posts_per_page, 'results_count_string' => $results_count_string, 'total_published' => $total_published ) ); ?>
+				<?php get_template_part( 'template-parts/resource/resource-filtergroup', null, array( 'posts_per_page' => $posts_per_page, 'results_count_string' => $results_count_string, 'total_published' => $total_published, 'queried_post_types' => $queried_post_types ) ); ?>
 			</div>
 		</div>
 	</main><!-- #main -->

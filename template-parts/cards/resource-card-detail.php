@@ -1,8 +1,9 @@
 <?php 
 $article = $args['article'];
-// fetch primary taxonomy=resource-type
+$post_type = get_post_type( $article );
 $resource_type = get_the_terms( $article->ID, 'resource-type' );
 $primary_type = ( $resource_type && ! is_wp_error( $resource_type ) ) ? $resource_type[0] : null;
+$group_type = get_field( 'group_type'); // ACF field used on 'topic' post type only
 if ( $primary_type ) {
   // if primary is not a parent, find the top-level parent
   if ( $primary_type->parent != 0 ) {
@@ -30,7 +31,13 @@ if ( $resource_type && ! is_wp_error( $resource_type ) ) {
   }
 }
 ?>
-<article class="resource-card resource-card-detail" aria-labelledby="resource-title-<?php echo esc_attr( $article->ID ); ?>" data-resource-type="<?php echo esc_attr( $type_slug ); ?>">
+<article 
+  class="resource-card resource-card-detail" 
+  aria-labelledby="resource-title-<?php echo esc_attr( $article->ID ); ?>" 
+  data-resource-type="<?php echo esc_attr( $type_slug ); ?>"
+  data-group-type="<?php echo esc_attr( $group_type ); ?>"
+  data-post-type="<?php echo esc_attr( $post_type ); ?>"
+>
   <a href="<?php echo get_permalink( $article->ID ); ?>">
     <div class="resource-types">
       <span class="resource-type"><?php echo esc_html( $type_name ); ?></span>

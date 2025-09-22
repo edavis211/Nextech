@@ -58,6 +58,7 @@ class Resource_Filter_Ajax {
             'academic_standard' => array_map('sanitize_text_field', $_POST['academic_standard'] ?? []),
             'grade_level_min' => sanitize_text_field($_POST['grade_level_min'] ?? '-1'),
             'grade_level_max' => sanitize_text_field($_POST['grade_level_max'] ?? '12'),
+            'queried_post_types' => sanitize_text_field($_POST['queried_post_types'] ?? 'resource,topic'),
             'sort_by' => sanitize_text_field($_POST['sort_by'] ?? 'newest'),
             'posts_per_page' => intval($_POST['posts_per_page'] ?? 12),
             'page' => intval($_POST['page'] ?? 1),
@@ -68,8 +69,13 @@ class Resource_Filter_Ajax {
      * Build WP_Query arguments based on filters
      */
     private function build_query_args( $filters ) {
+        // Parse post types from comma-separated string, fallback to both if empty
+        $post_types = ! empty( $filters['queried_post_types'] ) 
+            ? array_map( 'trim', explode( ',', $filters['queried_post_types'] ) )
+            : array( 'resource', 'topic' );
+        
         $args = array(
-            'post_type' => 'resource', // Adjust to your resource post type
+            'post_type' => $post_types, // Use the passed post types
             'post_status' => 'publish',
             'posts_per_page' => $filters['posts_per_page'],
             'paged' => $filters['page'],
@@ -265,7 +271,7 @@ class Resource_Filter_Ajax {
         while ( $query->have_posts() ) {
             $query->the_post();
             
-            // Use your existing resource card template
+            // Use your existing resource card template for both post types
             get_template_part( 'template-parts/cards/resource-card-detail', null, array( 'article' => get_post() ) );
         }
         

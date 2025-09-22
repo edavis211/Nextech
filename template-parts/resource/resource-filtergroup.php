@@ -5,6 +5,7 @@
 $posts_per_page = $args['posts_per_page'] ?? 12;
 $results_count_string = $args['results_count_string'] ?? '';
 $total_published = $args['total_published'] ?? null;
+$queried_post_types = $args['queried_post_types'] ?? array('resource', 'topic');
 
 // Function to build hierarchical term tree
 function build_term_hierarchy( $terms, $parent_id = 0 ) {
@@ -189,6 +190,9 @@ $standards = build_term_hierarchy( $standards_flat );
   </button>
 
   <form action="" id="resource-filters" method="get" role="form" aria-label="Filter resources" data-posts-per-page="<?php echo esc_attr( $posts_per_page ); ?>">
+    
+    <!-- Hidden field to pass queried post types to AJAX handler -->
+    <input type="hidden" name="queried_post_types" value="<?php echo esc_attr( implode( ',', $queried_post_types ) ); ?>">
     
     <div class="search-field-group">
       <label for="resource-search" class="text-label">

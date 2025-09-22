@@ -326,6 +326,7 @@ class ResourceFilterHandler {
       grade_level_min: gradeMin,
       grade_level_max: gradeMax,
       academic_standard: formData.getAll('filter-standard[]'),
+      queried_post_types: formData.get('queried_post_types') || 'resource,topic',
       sort_by: this.sortSelect ? this.sortSelect.value : 'newest', // Add sort option
       posts_per_page: this.postsPerPage,
       page: this.currentPage,
@@ -355,6 +356,7 @@ class ResourceFilterHandler {
       formData.append('search', filterData.search);
       formData.append('grade_level_min', filterData.grade_level_min);
       formData.append('grade_level_max', filterData.grade_level_max);
+      formData.append('queried_post_types', filterData.queried_post_types);
       formData.append('sort_by', filterData.sort_by); // Add sort parameter
       formData.append('posts_per_page', this.postsPerPage);
       formData.append('page', 1); // Always start at page 1 for new filters
@@ -422,9 +424,9 @@ class ResourceFilterHandler {
       if (data.showing !== undefined) {
         // Use the detailed showing format for filtered results
         if (data.count === 1) {
-          countElement.textContent = `Showing 1 of 1 resource`;
+          countElement.textContent = `Showing 1 of 1 item`;
         } else {
-          countElement.textContent = `Showing ${data.showing} of ${data.count} resources`;
+          countElement.textContent = `Showing ${data.showing} of ${data.count} items`;
         }
       } else {
         // Fallback to simple count
