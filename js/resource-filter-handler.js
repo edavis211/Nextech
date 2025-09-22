@@ -432,6 +432,43 @@ class ResourceFilterHandler {
       }
     }
     
+    // Update submit button text with current results count
+    const submitButton = document.getElementById('show-results');
+    if (submitButton && data.count !== undefined) {
+      const count = data.count || 0;
+      const resultText = count === 1 ? 'Result' : 'Results';
+      submitButton.textContent = `Show ${count} ${resultText}`;
+      
+      // Hide submit button when no results, show when results exist
+      if (count === 0) {
+        submitButton.setAttribute('hidden', '');
+      } else {
+        submitButton.removeAttribute('hidden');
+      }
+    }
+    
+    // Show/hide the no-results reset button and message based on results count
+    const noResultsResetButton = document.getElementById('no-results-reset');
+    const noResultsMessage = document.getElementById('no-results-message');
+    
+    if (data.count === 0) {
+      // No results found - show the reset button and message
+      if (noResultsResetButton) {
+        noResultsResetButton.removeAttribute('hidden');
+      }
+      if (noResultsMessage) {
+        noResultsMessage.removeAttribute('hidden');
+      }
+    } else {
+      // Results found - hide the reset button and message
+      if (noResultsResetButton) {
+        noResultsResetButton.setAttribute('hidden', '');
+      }
+      if (noResultsMessage) {
+        noResultsMessage.setAttribute('hidden', '');
+      }
+    }
+    
     // Trigger custom event for other scripts
     document.dispatchEvent(new CustomEvent('resourcesFiltered', {
       detail: { data, filters: this.getFilterData() }

@@ -19,19 +19,30 @@ function build_term_hierarchy( $terms, $parent_id = 0 ) {
 }
 
 // Function to render hierarchical checkbox inputs
-function render_hierarchical_terms( $terms, $name, $level = 0 ) {
+function render_hierarchical_terms( $terms, $name, $level = 0, $collapsible = false ) {
   foreach ( $terms as $term ) {
     $has_children = ! empty( $term->children );
     
     if ( $has_children ) {
-      // Parent term - static group label, not interactive
       $group_id = 'group-' . sanitize_title( $term->name );
-      echo '<div class="term-group" id="' . esc_attr( $group_id ) . '">';
-      echo '<h4 class="term-group-label" id="label-' . esc_attr( $group_id ) . '">' . esc_html( $term->name ) . '</h4>';
-      echo '<div class="term-children" role="group" aria-labelledby="label-' . esc_attr( $group_id ) . '">';
-      render_hierarchical_terms( $term->children, $name, $level + 1 );
-      echo '</div>';
-      echo '</div>';
+      
+      if ( $collapsible ) {
+        // Parent term - collapsible details element
+        echo '<details class="term-group collapsible" id="' . esc_attr( $group_id ) . '">';
+        echo '<summary class="term-group-label" id="label-' . esc_attr( $group_id ) . '">' . esc_html( $term->name ) . '</summary>';
+        echo '<div class="term-children" role="group" aria-labelledby="label-' . esc_attr( $group_id ) . '">';
+        render_hierarchical_terms( $term->children, $name, $level + 1, $collapsible );
+        echo '</div>';
+        echo '</details>';
+      } else {
+        // Parent term - static group label, not interactive (original behavior)
+        echo '<div class="term-group" id="' . esc_attr( $group_id ) . '">';
+        echo '<h4 class="term-group-label" id="label-' . esc_attr( $group_id ) . '">' . esc_html( $term->name ) . '</h4>';
+        echo '<div class="term-children" role="group" aria-labelledby="label-' . esc_attr( $group_id ) . '">';
+        render_hierarchical_terms( $term->children, $name, $level + 1, $collapsible );
+        echo '</div>';
+        echo '</div>';
+      }
     } else {
       // Child term - has checkbox
       $input_id = 'checkbox-' . sanitize_title( $name . '-' . $term->slug );
@@ -245,13 +256,14 @@ $standards = build_term_hierarchy( $standards_flat );
       <details aria-labelledby="standard-summary">
         <summary id="standard-summary" class="text-label" aria-expanded="false">Academic Standards</summary>
         <div class="filter-options" role="group" aria-labelledby="standard-summary">
-          <?php render_hierarchical_terms( $standards, 'filter-standard' ); ?>
+          <?php render_hierarchical_terms( $standards, 'filter-standard', 0, true ); ?>
         </div>
       </details>
     </fieldset>
     
     <div class="filter-actions">
-      <button type="button" class="clear-filters" aria-label="Clear all selected filters" hidden>Clear Filters</button>
+      <p id="no-results-message" hidden>No resources found matching your criteria.</p>
+      <button type="button" id="no-results-reset" class="clear-filters" aria-label="Clear all selected filters" hidden>Clear Filters</button>
       <button id="show-results" type="submit" class="btn btn-primary">Show <?= $total_published ?> Results</button>
     </div>
     

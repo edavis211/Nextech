@@ -82,5 +82,4 @@ $results_count_string = $total_published === 1 ? 'Showing 1 of 1 resource' : "Sh
 	</main><!-- #main -->
 
 <?php
-get_sidebar();
 get_footer();
