@@ -1,7 +1,7 @@
-<section class="resource-banner">
+<section class="topic-banner" id="overview">
   <div class="inner">
     <div class="infoblock">
-      <?php get_template_part( 'template-parts/resource/resource-breadcrumbs' ); ?>
+      <?php get_template_part( 'template-parts/topic/topic-breadcrumbs' ); ?>
       <h1><?php the_title(); ?></h1>
       <div class="description"><?php the_excerpt(); ?></div>
       <div class="meta">
@@ -12,11 +12,6 @@
         <?php get_template_part( 'template-parts/resource/resource-courses' ); ?>
       </div>
     </div>
-    <div class="actions resource-actions">
-      <?php get_template_part( 'template-parts/resource/resource-actions' ); ?>
-    </div>
-    <div class="featured-img">
-      <?php the_post_thumbnail( 'full' ); ?>
-    </div>
+    <div class="logo-divider"></div>
   </div>
 </section>

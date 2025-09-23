@@ -1,0 +1,35 @@
+main.single-topic {
+ 	background-color: #fff;
+  padding-top: 5rem; 
+  display: flex;
+  gap: clamp(3rem, 5vw, 5rem);
+  margin: auto;
+  justify-content: center;
+  max-width: 80rem;
+  .content-area {
+    width: 100%;
+    flex-basis: 53rem;
+    flex-grow: 1;
+  }
+
+  aside.sidebar {
+    flex-basis: 23rem;
+    flex-grow: 0;
+    padding-bottom: 3rem;
+    .actions {
+      position: sticky;
+      top: 3rem;
+    }
+  }
+
+}
+section.related-resources.related-topics {
+  background-color: $color__background-light;
+  padding: clamp(3rem, 5vw, 5rem) clamp(1.5rem, 3vw, 3rem);
+  margin-top: clamp(3rem, 5vw, 5rem);
+  .resource-cards {
+    article.resource-card {
+      background-color: #fff;
+    }
+  }
+}
