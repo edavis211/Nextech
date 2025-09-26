@@ -1,38 +1,83 @@
-  .resource-actions {
-    grid-area: actions;
-    ul.resource-action-buttons {
-      list-style: none;
+$mobile-breakpoint: 1000px;
+.resource-actions {
+  grid-area: actions;
+  ul.resource-action-buttons {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    li {
       padding: 0;
       margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      li {
-        padding: 0;
-        margin: 0;
-        button {
-          display: flex;
-          align-items: center;
-          gap: .5rem;
-          justify-content: space-between;
-          width: 100%;
-          background-color: transparent;
-          border: 2px solid $color__background-black;
-          text-transform: uppercase;
-          font-family: $font__heading;
-          font-size: .875rem;
-          font-weight: 600;
-          border-radius: 0;
-          svg {
-            flex: 0 0 auto;
-            width: auto;
-            height: 1.25rem;
-            * {
-              fill: none;
-              stroke: $color__orange;
-              stroke-width: 2;
+      button {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        justify-content: space-between;
+        width: 100%;
+        background-color: transparent;
+        border: 2px solid $color__background-black;
+        text-transform: uppercase;
+        font-family: $font__heading;
+        font-size: .875rem;
+        font-weight: 600;
+        border-radius: 0;
+        &:focus,
+        &:hover {
+          background-color: $color__background-light;
+          border-color: $color__orange;
+          outline: none;
+        }
+        svg {
+          flex: 0 0 auto;
+          width: auto;
+          height: 1.25rem;
+          * {
+            fill: none;
+            stroke: $color__orange;
+            stroke-width: 2;
+          }
+        }
+      }
+    }
+  }
+  }
+
+  .resource-actions.topic-actions {
+    ul.resource-action-buttons {
+      li.toc-wrap{
+        display: none;
+      }
+    }
+  }
+
+  @media screen and (max-width: $mobile-breakpoint) {
+    .resource-actions {
+      position: static;
+      top: auto;
+      ul.resource-action-buttons {
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: .5rem;
+        li {
+          flex: 0;
+          button {
+            font-size: .75rem;
+            padding: .5rem;
+            border-color: $color__background-light;
+            .text {
+              display: none;
             }
           }
+        }
+      }
+    }
+    .resource-actions.topic-actions {
+      ul.resource-action-buttons {
+        li.toc-wrap{
+          display: flex;
         }
       }
     }

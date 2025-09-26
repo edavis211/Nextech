@@ -1,7 +1,7 @@
 <?php
 $related_topics = get_field('related_topics');
 if( $related_topics && is_array( $related_topics ) && count( $related_topics ) > 0 ): ?>
-<section class="related-resources related-topics">
+<section id="related-topics" class="related-resources related-topics">
   <div class="inner">
     <h2>More Topics Like This</h2>
     <div class="resource-cards">

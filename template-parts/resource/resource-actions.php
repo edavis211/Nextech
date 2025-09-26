@@ -1,6 +1,6 @@
 <ul class="resource-action-buttons">
   <li>
-    <button class="print">
+    <button class="print" onclick="window.print()">
       <span class="text">Print this page</span>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.37 22">
         <g>

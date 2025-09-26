@@ -1,4 +1,4 @@
-<section class="content-nav topic">
+<section id="table-of-contents" class="content-nav topic">
   <h2>Topic Contents</h2>
 	<nav class="nav">
 		<ul>

@@ -12,6 +12,7 @@
  * @package Nexus
  */
 
+wp_enqueue_script( 'topic-page', get_template_directory_uri() . '/js/single-topic.js', array('jquery'), '1.0.0', true );
 get_header();
 while ( have_posts() ) : the_post();?>
 	<main id="primary" class="site-main single-topic">
@@ -23,8 +24,8 @@ while ( have_posts() ) : the_post();?>
 			?>
 		</div>		
 		<aside class="sidebar">
-			<div class="actions resource-actions">
-				<?php get_template_part( 'template-parts/resource/resource-actions' ); ?>
+			<div class="actions resource-actions topic-actions">
+				<?php get_template_part( 'template-parts/topic/topic-actions' ); ?>
 				<?php get_template_part( 'template-parts/topic/topic-content-nav' ); ?>
 			</div>
 		</aside>

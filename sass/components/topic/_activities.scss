@@ -1,3 +1,4 @@
+$mobile-breakpoint: 1000px;
 section.topic-activities {
   .activities-grid {
      margin-top: clamp(3rem, 5vw, 5rem);
@@ -6,21 +7,39 @@ section.topic-activities {
       display: flex;
       flex-direction: column;
       gap: clamp(3rem, 5vw, 5rem);
+      @media screen and (max-width: $mobile-breakpoint) {
+        border-bottom: 2px solid $color__background-dark;
+      }
 
       .activity-resource {
         display: flex;
         gap: clamp(3rem, 5vw, 5rem);
         margin-bottom: clamp(3rem, 5vw, 5rem);
+        @media screen and (max-width: $mobile-breakpoint) {
+          flex-direction: column-reverse;
+          gap: 0;
+        }
 
         article {
           flex-basis: 25rem;
           flex-grow: 0;
           background-color: $color__background-light;
+          @media screen and (max-width: $mobile-breakpoint) {
+            flex-basis: auto;
+            width: 100%;
+          }
         }
 
         .activity-resource-description {
           flex-basis: 25rem;
           flex-grow: 1;
+          @media screen and (max-width: $mobile-breakpoint) {
+            flex-basis: auto;
+            width: 100%;
+          }
+          p {
+            font-size: clamp(.875rem, 1.5vw, 1rem);
+          }
         }
       }
     }

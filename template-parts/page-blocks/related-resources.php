@@ -1,7 +1,7 @@
 <?php
 $related_resources = get_field('related_resources');
 if( $related_resources && is_array( $related_resources ) && count( $related_resources ) > 0 ): ?>
-<section class="related-resources">
+<section id="related-resources" class="related-resources">
   <div class="inner">
     <h2>Related Resources</h2>
     <div class="resource-cards">

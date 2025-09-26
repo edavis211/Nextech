@@ -2,10 +2,12 @@ header.site-header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding-inline: clamp(1rem, 5%, 5rem);
+	padding-inline: clamp(1rem, 3vw, 5rem);
 	padding-top: 1.5rem;
 	padding-bottom: .5rem;
 	border-bottom: 2px solid #e6e6e6;
+	gap: 1rem;
+	
 	.site-branding {
 		flex-basis: clamp(150px, 20%, 300px);
 		overflow: visible;
@@ -39,6 +41,12 @@ header.site-header {
 		align-items: center;
 		justify-content: flex-end;
 		width: 100%;
+
+		.menu-main-navigation-container {
+			@media screen and (max-width: 800px) {
+				display: none;
+			}
+		}
 	
 		ul {
 			display: flex;
@@ -191,6 +199,31 @@ header.site-header {
 
 	#menu-toggle {
 		display: none;
+		background: none;
+		border: none;
+		padding: 0;
+		margin: 0;
+		cursor: pointer;
+		svg {
+			width: 30px;
+			height: 30px;
+			* {
+				transition: all 0.2s ease;
+				fill: $color__text-main;
+			}
+		}
+		&:hover,
+		&:focus {
+			outline: none;
+			svg {
+				* {
+					fill: $color__orange;
+				}
+			}
+		}
+		@media screen and (max-width: 800px) {
+			display: flex;
+		}
 	}
 
 

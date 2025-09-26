@@ -34,15 +34,18 @@ if ( $terms && ! is_wp_error( $terms ) ) {
     }
   }
 }
-$breacrumbsString = '';
-if ( count($breadcrumbs) ) {
-  $last_index = count($breadcrumbs) - 1;
-  foreach ( $breadcrumbs as $index => $crumb ) {
-    $breacrumbsString .= '<a href="'. esc_url( $crumb['url'] ) .'">'. esc_html( $crumb['title'] ) .'</a>';
-    if ( $index !== $last_index ) {
-      $breacrumbsString .= ' &gt; ';
-    }
-  }
-}
 ?>
-<div class="breadcrumbs"><?php echo $breacrumbsString; ?></div>
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+  <?php if ( count($breadcrumbs) ) : ?>
+    <ol class="breadcrumb-list">
+      <?php foreach ( $breadcrumbs as $crumb ) : ?>
+        <li class="breadcrumb-item">
+          <a href="<?php echo esc_url( $crumb['url'] ); ?>"><?php echo esc_html( $crumb['title'] ); ?></a>
+        </li>
+      <?php endforeach; ?>
+      <li class="breadcrumb-item current" aria-current="page">
+        <?php the_title(); ?>
+      </li>
+    </ol>
+  <?php endif; ?>
+</nav>

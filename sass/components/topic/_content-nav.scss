@@ -4,6 +4,13 @@ section.content-nav {
   margin-block: 1.5rem;
   background-color: $color__background-light;
 
+  @media screen and (max-width: 900px) {
+    display: none;
+    &[aria-hidden="false"] {
+      display: block;
+    }
+  }
+
   h2 {
     font-size: clamp(1.25rem, 2.8vw, 1.75rem);
     margin: 0;

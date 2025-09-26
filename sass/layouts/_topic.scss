@@ -1,3 +1,5 @@
+$mobile-breakpoint: 1000px;
+
 main.single-topic {
  	background-color: #fff;
   padding-top: 5rem; 
@@ -6,16 +8,32 @@ main.single-topic {
   margin: auto;
   justify-content: center;
   max-width: 80rem;
+  padding-inline: clamp(0.5rem, 3vw, 3rem);
+  @media screen and (max-width: $mobile-breakpoint) {
+    flex-direction: column-reverse;
+    padding-top: 3rem;
+    gap: 2rem;
+  }
   .content-area {
     width: 100%;
     flex-basis: 53rem;
     flex-grow: 1;
+    >section:not(.topic-banner) {
+      padding-top: 3rem;
+    }
   }
 
   aside.sidebar {
     flex-basis: 23rem;
     flex-grow: 0;
     padding-bottom: 3rem;
+    background-color: #fff;
+    @media screen and (max-width: $mobile-breakpoint) {
+      position: sticky;
+      top: 0;
+      flex-basis: auto;
+      padding-bottom: 0;
+    }
     .actions {
       position: sticky;
       top: 3rem;
