@@ -1,0 +1,235 @@
+/**
+ * Mobile Navigation Styles - Clean and Simple
+ */
+
+/* Reset dialog default styles */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;  
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: white;
+    z-index: 9999;
+}
+
+/* Dialog backdrop */
+.mobile-menu::backdrop {
+    background: white;
+}
+
+/* Hide dialog when not open */
+.mobile-menu:not([open]) {
+    display: none;
+}
+
+.mobile-menu .menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 60px;
+  background: white;
+  padding-inline: 1rem;
+  .site-branding {
+    max-width: 85px;
+    transform: translateY(5px);
+    a {
+      svg {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+  #close-menu {
+      background: none;
+      border: none;
+      height: 30px;
+      width: 30px;
+      cursor: pointer;
+      z-index: 10001;
+      border-radius: 4px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+}
+
+/* Close button */
+
+.mobile-menu #close-menu svg {
+    width: 20px;
+    height: auto;
+    fill: $color__text-main;
+}
+
+.mobile-menu #close-menu:hover,
+.mobile-menu #close-menu:focus {
+    background: rgba(255, 255, 255, 0.1);
+    outline: 2px solid $color__orange;
+    outline-offset: 0;
+}
+
+.mobile-menu #close-menu:hover svg {
+    fill: #e98300;
+}
+
+/* Menu container - slide in from right */
+.mobile-menu .menu-main-navigation-container {
+    // position: absolute;
+    // top: 60px;
+    // right: 0;
+    // width: 100%;
+    // height: 100vh;
+    // background: white;
+    // padding: 4rem 2rem 2rem;
+    // overflow-y: auto;
+    // box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    // transform: translateX(100%);
+    // transition: transform 0.3s ease;
+}
+
+/* Show menu when dialog is open */
+.mobile-menu[open] .menu-main-navigation-container {
+    transform: translateX(0);
+}
+
+/* Menu list */
+.mobile-menu .menu-main-navigation-container ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Menu items */
+.mobile-menu .menu-main-navigation-container li {
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.mobile-menu .menu-main-navigation-container li:first-child {
+    border-top: 1px solid #e6e6e6;
+}
+
+/* Menu links */
+.mobile-menu .menu-main-navigation-container a {
+    display: block;
+    padding: 1rem 0;
+    color: #2e3333;
+    text-decoration: none;
+    font-size: 1.125rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu .menu-main-navigation-container a:hover,
+.mobile-menu .menu-main-navigation-container a:focus {
+    color: #e98300;
+    background: rgba(233, 131, 0, 0.05);
+    padding-left: 0.5rem;
+    outline: none;
+}
+
+.mobile-menu .menu-main-navigation-container a:focus {
+    outline: 2px solid #e98300;
+    outline-offset: -2px;
+}
+
+
+.mobile-menu .current-menu-item > a::before,
+.mobile-menu .current_page_item > a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 30px;
+    background: #e98300;
+    border-radius: 2px;
+}
+
+/* Dropdown menus - always visible */
+.mobile-menu .menu-item-has-children > a {
+    position: relative;
+    /* Removed padding-right since we're removing the arrow */
+}
+
+/* Removed arrow indicator since we're not toggling anymore */
+
+/* Submenu - always visible */
+.mobile-menu .sub-menu {
+    background: #f8f8f8;
+    /* Removed max-height and transition - always show */
+}
+
+.mobile-menu .sub-menu li {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.mobile-menu .sub-menu a {
+    padding-left: 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #666;
+}
+
+.mobile-menu .sub-menu a:hover,
+.mobile-menu .sub-menu a:focus {
+    color: #e98300;
+    padding-left: 1.5rem;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 480px) {
+    .mobile-menu .menu-main-navigation-container {
+        width: 100vw;
+        max-width: none;
+        padding: 4rem 1rem 2rem;
+    }
+    
+    .mobile-menu #close-menu {
+        right: 1rem;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .mobile-menu .menu-main-navigation-container {
+        padding: 3rem 0.75rem 1rem;
+    }
+    
+    .mobile-menu .menu-main-navigation-container a {
+        font-size: 1rem;
+        padding: 0.875rem 0;
+    }
+}
+
+/* Prevent body scroll when menu is open */
+body.mobile-menu-open {
+    overflow: hidden;
+}
+
+/* Accessibility - screen reader only */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .mobile-menu .menu-main-navigation-container,
+    .mobile-menu .sub-menu {
+        transition: none;
+    }
+}
