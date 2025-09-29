@@ -79,7 +79,7 @@
 				)
 			);
 			?>
-			<a href="#" class="profile-link">
+			<a href="<?=get_site_url()?>/profile" class="profile-link">
 				<svg id="profile-icon"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
 						<g>
 							<circle class="cls-1" cx="16" cy="16" r="15" style="fill: none; stroke: #2e3333; stroke-miterlimit: 10; stroke-width: 2px;"/>

@@ -13,24 +13,10 @@
     </button>
   </li>
   <li>
-    <button class="bookmark" aria-label="Save to my library" title="Save to my library">
-      <span class="text">Save to my library</span>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.37 22">
-        <g>
-          <polygon points="1 21 1 1 17.37 1 17.37 21 9.19 15.99 1 21"/>
-        </g>
-      </svg>
-    </button>
+    <?=do_shortcode('[sbv_bookmark]'); ?>
   </li>
   <li>
-    <button class="rate" aria-label="Rate this resource" title="Rate this resource">
-      <span class="text">Rate this resource</span>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 20">
-        <g>
-          <polygon points="11 1 13.91 7.51 21 8.27 15.71 13.04 17.18 20.02 11 16.46 4.82 20.02 6.29 13.04 1 8.27 8.09 7.51 11 1"/>
-        </g>
-      </svg>
-    </button>
+    <?=do_shortcode('[sbv_rating]'); ?>
   </li>
   <li class="toc-wrap">
     <button class="toc" aria-expanded="false" aria-controls="table-of-contents" title="Show table of contents" aria-label="Show table of contents">

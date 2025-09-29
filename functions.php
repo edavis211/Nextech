@@ -214,5 +214,3 @@ function yoasttobottom() {
 }
 add_filter( 'wpseo_metabox_prio', 'yoasttobottom');
 
- 
-

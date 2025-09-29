@@ -11,7 +11,15 @@ $mobile-breakpoint: 1000px;
     li {
       padding: 0;
       margin: 0;
-      button {
+      >div {
+        width: 100%;
+        .sbv-rating-display,
+        .sbv-bookmark-count {
+          display: none;
+        }
+      }
+      button,
+      a.sbv-bookmark-login {
         display: flex;
         align-items: center;
         gap: .5rem;
@@ -24,11 +32,14 @@ $mobile-breakpoint: 1000px;
         font-size: .875rem;
         font-weight: 600;
         border-radius: 0;
+        padding: .5rem 1rem;
+        color: #000 !important;
         &:focus,
         &:hover {
           background-color: $color__background-light;
           border-color: $color__orange;
           outline: none;
+          color: #000 !important;
         }
         svg {
           flex: 0 0 auto;
@@ -38,6 +49,97 @@ $mobile-breakpoint: 1000px;
             fill: none;
             stroke: $color__orange;
             stroke-width: 2;
+          }
+        }
+      }
+      button.sbv-modal-close {
+        background: none;
+        border: none;
+        font-size: 2em;
+        cursor: pointer;
+        color: #999;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        flex-grow: 0;
+        align-items: center;
+        justify-content: center;
+        svg {
+          width: .5em;
+          height: auto;
+          path {
+            stroke: $color__orange;
+            stroke-width: 2;
+          }
+        }
+        &:hover,
+        &:focus {
+          outline: 2px solid $color__orange;
+        }
+      }
+
+      .sbv-modal-body {
+        .sbv-rating-interface {
+          p {
+            margin: 0;
+            padding: 0;
+            font-size: 1rem;
+            text-align: center;
+          }
+
+          .sbv-stars-input {
+            margin-top: 10px;
+            button {
+              width: 3rem;
+              height: 3rem;
+              background: none;
+              border: none;
+              padding: .25rem;
+              border-radius: 10px;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              svg {
+                width: 2rem;
+                height: auto;
+                transform: translateY(0);
+                transition: all 0.2s ease-in-out;
+                * {
+                  fill: none;
+                  stroke: $color__orange;
+                  stroke-width: 2;
+                }
+              }
+              &:hover,
+              &:focus {
+                outline: 2px solid $color__orange;
+                svg {
+                  transform: translateY(-3px);
+                }
+              }
+              &.active {
+                svg {
+                  * {
+                    fill: $color__orange;
+                  }
+                }
+              }
+            }
+          }
+
+          .sbv-rating-actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            button {
+              text-align: center;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
           }
         }
       }
