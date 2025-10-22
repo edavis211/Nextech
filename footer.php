@@ -14,7 +14,7 @@
 	<footer id="colophon" class="site-footer">
 		<section class="footer-cta">
 			<h2>Developing Computer Science education in Indiana, together.</h2>
-			<a class="button" href="#">More from Nextech</a>
+			<a class="button" href="https://nextech.org/" target="_blank">More from Nextech</a>
 		</section>
 
 		<section class="footer-main">

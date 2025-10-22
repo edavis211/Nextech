@@ -3,6 +3,25 @@ window.addEventListener('load', function() {
     // Your custom options
   });
 
+  // Handle search form submission
+  const searchForm = document.getElementById('keyword-search');
+  if (searchForm) {
+    searchForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const searchInput = this.querySelector('input[name="search"]');
+      const searchValue = searchInput.value.trim();
+      
+      if (searchValue) {
+        const baseUrl = this.action;
+        const searchUrl = `${baseUrl}?search=${encodeURIComponent(searchValue)}`;
+        window.location.href = searchUrl;
+      } else {
+        // If no search value, just go to the resource library page
+        window.location.href = this.action;
+      }
+    });
+  }
+
   // selcet all links with data-copy-url attribute
   const copyUrlLinks = document.querySelectorAll('a[data-copy-url]');
 

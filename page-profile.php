@@ -12,22 +12,14 @@
  * @package Nexus
  */
 
-get_header();
-?>
+get_header();?>
 
 	<main id="primary" class="site-main">
-
-		<?php
-		while ( have_posts() ) :
-			the_post();
-
-			get_template_part( 'template-parts/content', 'page' );
-
-		endwhile; // End of the loop.
-		?>
-
+		<?php while ( have_posts() ) : the_post(); ?>
+			<div class="entry-content">
+				<?php the_content(); ?>
+			</div><!-- .entry-content -->
+		<?php endwhile; ?>
 	</main><!-- #main -->
 
-<?php
-get_sidebar();
-get_footer();
+<?php get_footer();
