@@ -55,14 +55,17 @@ section.video-block {
     align-items: center;
     padding-inline: clamp(1rem, 3vw, 2rem);
     padding-top: 1rem;
-    padding-bottom: .5rem;
+    padding-bottom: 1rem;
     gap: 1rem;
+    @media screen and (max-width: 600px) {
+      gap: .5rem;
+      padding-inline: 0;
+    }
     h2 {
       font-size: clamp(1.5rem, 3vw, 1.75rem);
       line-height: 1.2;
       margin: 0;
       color: $color__background-dark;
-      max-width: 50%;
     }
     .learn-more-button {
       display: flex;
@@ -78,7 +81,6 @@ section.video-block {
       transition: background-color 0.3s ease;
       text-transform: uppercase;
       color: $color__text-main;
-      margin-bottom: .5rem;
       &:hover,
       &:focus {
         text-decoration: none;
@@ -89,6 +91,9 @@ section.video-block {
         svg {
           transform: translateX(5px);
         }
+      }
+      @media screen and (max-width: 600px) {
+        font-size: .75rem;
       }
 
       svg {

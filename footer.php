@@ -9,17 +9,22 @@
  * @package Nexus
  */
 
+$footerCTABlock = get_field( 'footer_cta_block', 'option' );
+$footerSiteDescription = get_field( 'footer_site_description', 'option' );
+$footerSubbscribeHeading = get_field( 'footer_subscribe_heading', 'option' );
+$socialLinks = get_field( 'social_links', 'option' );
+
 ?>
 
 	<footer id="colophon" class="site-footer">
 		<section class="footer-cta">
-			<h2>Developing Computer Science education in Indiana, together.</h2>
-			<a class="button" href="https://nextech.org/" target="_blank">More from Nextech</a>
+			<h2><?= $footerCTABlock['heading']; ?></h2>
+			<a class="button" href="<?= $footerCTABlock['link']['url']; ?>" target="_blank"><?= $footerCTABlock['link']['title']; ?></a>
 		</section>
 
 		<section class="footer-main">
 			<div class="subscribe">
-				<h2>Get updates straight to your inbox</h2>
+				<h2><?= $footerSubbscribeHeading; ?></h2>
 				<form action="#" method="post">
 					<input type="email" name="email" placeholder="Enter your email address" required>
 					<button type="submit" title="Subscribe" aria-label="Subscribe">
@@ -32,7 +37,7 @@
 					</button>
 				</form>
 				<div class="social">
-					<a href="#" aria-label="Instagram">
+					<a href="<?= $socialLinks['instagram']; ?>" aria-label="Instagram">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20.09">
 							<g>
 								<g>
@@ -43,14 +48,14 @@
 							</g>
 						</svg>
 					</a>
-					<a href="#" aria-label="Facebook">
+					<a href="<?= $socialLinks['facebook']; ?>" aria-label="Facebook">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9.29 20">
 							<g>
 								<path d="M6.13,4.4c0-.78.52-.96.88-.96h2.23V.01h-3.08c-3.41-.01-4.19,2.54-4.19,4.18v2.29H0v3.53h1.98v9.99h4.15v-9.99h2.8l.36-3.53h-3.17v-2.08Z"/>
 							</g>
 						</svg>
 					</a>
-					<a href="#" aria-label="Twitter">
+					<a href="<?= $socialLinks['twitter']; ?>" aria-label="Twitter">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 18.39">
 							<g>
 								<path d="M12.03,7.88L18.99,0h-3.08l-5.25,6.07L6.18.17H0l7.6,9.88L.36,18.3h3.02l5.68-6.36,4.95,6.44h5.99l-7.97-10.51ZM3.37,1.83h1.98l11.22,14.81h-1.83L3.37,1.83Z"/>
@@ -99,27 +104,25 @@
 						</g>
 					</g>
 				</svg>				
-				<p>Nexus is a lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna </p>
+				<p><?= $footerSiteDescription; ?></p>
 			</div>
 			<div class="links">
 				<div class="col">
 					<h2>Explore</h2>
+					<?php $footerExploreMenu = wp_get_nav_menu_items( 'footer-explore-menu' ); ?>
 					<ul>
-						<li><a href="#">Link 1</a></li>
-						<li><a href="#">Link 2</a></li>
-						<li><a href="#">Link 3</a></li>
-						<li><a href="#">Link 2</a></li>
-						<li><a href="#">Link 3</a></li>
+						<?php foreach ( $footerExploreMenu as $menuItem ) : ?>
+							<li><a href="<?= esc_url( $menuItem->url ); ?>"><?= esc_html( $menuItem->title ); ?></a></li>
+						<?php endforeach; ?>
 					</ul>
 				</div>
 				<div class="col">
 					<h2>Profile</h2>
 					<ul>
-						<li><a href="#">Link 1</a></li>
-						<li><a href="#">Link 2</a></li>
-						<li><a href="#">Link 3</a></li>
-						<li><a href="#">Link 2</a></li>
-						<li><a href="#">Link 3</a></li>
+						<li><a href="<?= get_site_url(); ?>/profile">Log In</a></li>
+						<li><a href="<?= get_site_url(); ?>/profile">Account Details</a></li>
+						<li><a href="#">Saved Resources</a></li>
+						<li><a href="#">Stay Updated</a></li>
 					</ul>
 				</div>
 			</div>

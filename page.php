@@ -15,16 +15,32 @@
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
+	<main id="primary" class="site-main page-default">
 
-		<?php
-		while ( have_posts() ) :
-			the_post();
+		<?php while ( have_posts() ) : the_post(); ?>
+		<?php $featuredImg = get_the_post_thumbnail_url( get_the_ID(), 'full' ); ?>
+		
+			<header class="entry-header">
+				<div class="inner">
+					<div class="col">					
+						<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+						<div class="page-description">
+							<?php the_content();?>
+						</div>
+					</div>
+					<?php if ( $featuredImg ) : ?>
+						<div class="col image-col">
+							<img src="<?php echo esc_url( $featuredImg ); ?>" alt="<?php the_title_attribute(); ?>" />
+						</div>
+					<?php endif; ?>
+				</div>
+			</header>
 
-			get_template_part( 'template-parts/content', 'page' );
+			<div class="page-blocks-container">
+				<?php get_template_part( 'template-parts/page-blocks/block-controller' ); ?>
+			</div>
 
-		endwhile; // End of the loop.
-		?>
+			<?php endwhile; ?>
 
 	</main><!-- #main -->
 

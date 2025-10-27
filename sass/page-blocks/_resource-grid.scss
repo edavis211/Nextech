@@ -1,0 +1,25 @@
+section.resource-grid {
+  margin-block: clamp(2rem, 10vw, 3rem);
+  padding-inline: clamp(1rem, 5vw, 3rem);
+  
+  .resource-wrap {
+    display: flex;
+    gap: clamp(2.5rem, 3vw, 5rem);
+    
+    .resource-container {
+      background-color: #f4f4f4;
+      width: 100%;
+      max-width: clamp(800px, 80vw, 1200px);
+      margin: 0 auto;
+      flex-grow: 1;
+      padding: 2rem;
+
+      .resource-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+        gap: 2rem;
+      }
+    }
+  }
+
+}

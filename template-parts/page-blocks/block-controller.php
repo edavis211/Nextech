@@ -20,6 +20,12 @@ if( $blocks = get_field('page_blocks') ) {
       get_template_part( 'template-parts/page-blocks/icon-block', null, ['block' => $block] );
     elseif ($block['acf_fc_layout'] == 'featured_image_block') :
       get_template_part( 'template-parts/page-blocks/featured-image-block', null, ['block' => $block] );
+    elseif ($block['acf_fc_layout'] == 'meta_box') :
+      get_template_part( 'template-parts/page-blocks/meta_box', null, ['block' => $block] );
+    elseif ($block['acf_fc_layout'] == 'resource_grid') :
+      get_template_part( 'template-parts/page-blocks/resource-grid', null, ['block' => $block] );
+    elseif ($block['acf_fc_layout'] == 'section_heading') :
+      get_template_part( 'template-parts/page-blocks/section-heading', null, ['block' => $block] );
     endif;
   }
 }

@@ -2,7 +2,7 @@
   <div class="inner">
     <h2>Search for Computer Science Resources for Your Classroom</h2>
     <form action="<?=get_site_url();?>/resource-library/" id="keyword-search">
-      <input type="text" name="search" placeholder="Search by keyword, creator, standard, or more..." />
+      <input type="text" name="search" placeholder="Search by keyword" />
       <button type="submit">
         <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22.69 22.69">
           <defs>

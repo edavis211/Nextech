@@ -5,7 +5,7 @@ section.two_column_image_blocks {
     max-width: 80rem;
     margin: auto;
     .header {
-      padding-bottom: 3rem;
+      padding-bottom: clamp(3rem, 5vw, 5rem);
       max-width: 1000px;
       margin: auto;
       display: grid;
@@ -62,9 +62,8 @@ section.two_column_image_blocks {
           grid-area: image;
           position: relative;
           height: 100%;
-          min-height: 300px;
+          min-height: clamp(300px, 50vw, 640px);
           img {
-            min-height: 300px;
             position: absolute;
             top: 0;
             left: 0;
@@ -94,5 +93,10 @@ section.two_column_image_blocks {
         }
       }
     }
+  }
+}
+.page-blocks-container {
+  section.two_column_image_blocks {
+    background-color: #f4f4f4;
   }
 }

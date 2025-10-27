@@ -10,7 +10,8 @@ header.site-header {
 	min-height: 60px;
 	
 	.site-branding {
-		flex-basis: clamp(150px, 20%, 300px);
+		flex-basis: clamp(200px, 20vw, 300px);
+		width: clamp(200px, 20vw, 300px);
 		overflow: visible;
 		* {
 			overflow: visible;
@@ -18,8 +19,10 @@ header.site-header {
 		a {
 			outline-offset: 3px;
 			display: flex;
-			overflow: visible;
+			width: 100%;
 			svg {
+				width: 100%;
+				height: auto;
 				g {
 					transition: transform 0.3s ease, outline 0.3s ease;
 					transform-origin: center left;

@@ -1,6 +1,7 @@
 section.quick-search {
   background-color: $color__background-light;
   padding: clamp(3rem, 5vw, 5rem) clamp(1rem, 5vw, 3rem);
+
   .inner {
     max-width: 650px;
     margin: 0 auto;
@@ -16,14 +17,20 @@ section.quick-search {
       background-color: #fff;
       border-radius: 50px;
       padding: 10px 15px;
+      @media screen and (max-width: 600px) {
+        gap: 15px;
+      }
 
       input {
         flex: 1;
-        padding: 1rem;
+        padding: .5rem 1rem;
         border-radius: 30px;
         font-size: 1rem;
         border: 1px solid transparent;
         color: $color__text-main;
+        @media screen and (max-width: 600px) {
+          font-size: 0.875rem;
+        }
         &::placeholder {
           color: $color__text-main;
         }
@@ -47,6 +54,7 @@ section.quick-search {
         svg {
           stroke: #fff;
           transition: all 0.3s ease;
+          width: 1.5rem;
         }
         &:hover {
           svg {

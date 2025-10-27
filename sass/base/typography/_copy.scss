@@ -31,7 +31,12 @@ i {
 }
 
 blockquote {
-	margin: 0 1.5em;
+	margin: 0;
+	margin-bottom: 2rem;
+	padding-top: 1.5rem;
+	padding-bottom: .5rem;
+	padding-inline: clamp(1rem, 5vw, 2rem);
+	background-color: #f4f4f4;
 }
 
 address {
