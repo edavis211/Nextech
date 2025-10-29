@@ -1,0 +1,53 @@
+@media print {
+  main.single-topic {
+    padding-top: 0px;
+    padding-inline: 0;
+    display: block;
+
+    .logo-divider {
+      display: none;
+    }
+
+    .content-area {
+      display: block;
+      .topic-banner {
+        .inner {
+          margin-bottom: 0;
+          .infoblock {
+            background-color: white;
+            color: #000;
+            padding-inline: 0;
+            padding-top: 30px;
+            nav.breadcrumbs {
+              color: #000;
+              ol, li, a {
+                color: #000;
+              }
+            }
+          }
+
+          .featured-img {
+            display: none;
+          }
+        }
+      }
+      section#about {
+        padding-top: 0;
+        h2 {
+          margin-top: 0;
+          margin-bottom: 15px;
+          padding-top: 15px;
+          font-size: 2rem;
+        }
+      }
+    }
+
+    aside.sidebar {
+      display: none;
+    }
+  }
+
+  section.related-resources.related-topics {
+    display: none;
+  }
+}

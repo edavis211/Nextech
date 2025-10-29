@@ -6,6 +6,10 @@
         <summary>
           <h2><?=$item['title']; ?></h2>
           <div class="indicator"></div>
+          <div class="content print-only">
+            <?php echo wp_kses_post( $item['content'] ); ?>
+          </div>
+
         </summary>
         <div class="accordion-content">
           <div class="content">

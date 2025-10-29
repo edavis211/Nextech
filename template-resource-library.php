@@ -91,6 +91,7 @@ $results_count_string = $total_published === 1 ? 'Showing 1 of 1 item' : "Showin
 				<?php get_template_part( 'template-parts/resource/resource-filtergroup', null, array( 'posts_per_page' => $posts_per_page, 'results_count_string' => $results_count_string, 'total_published' => $total_published, 'queried_post_types' => $queried_post_types ) ); ?>
 			</div>
 		</div>
+		<a href="#resource-results-container" class="back-to-top button">Scroll to Top</a>
 	</main><!-- #main -->
 
 <?php

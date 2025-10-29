@@ -1,0 +1,90 @@
+@media print {
+  main.single-resource {
+    padding-top: 0px;
+
+    section.resource-banner {
+      display: block;
+      padding-inline: 0;
+      .inner {
+        display: block;
+        margin-bottom: 0px;
+
+        .infoblock {
+          background-color: white;
+          color: #000;
+          padding-inline: 0;
+          padding-top: 30px;
+          nav.breadcrumbs {
+            color: #000;
+            ol, li, a {
+              color: #000;
+            }
+          }
+        }
+
+        .featured-img {
+          display: none;
+        }
+        .actions.resource-actions {
+          display: none;
+        }
+      }
+    }
+
+    section.resource-materials {
+      padding-inline: 0;
+      h2 {
+        margin-top: 0;
+        margin-bottom: 15px;
+        padding-top: 15px;
+        text-decoration: underline;
+      }
+      ul.materials-list  {
+        li.material-item {
+          display: block;
+          .text-wrap {
+            .print-only {
+              font-size: .875rem;
+            }
+          }
+          .material-icon,
+          .material-actions {
+            display: none;
+          }
+        }
+      }
+    }
+
+    section.resource-accordion {
+      background-color: #fff;
+      padding: 0;
+      margin-bottom: 30px;
+      details.accordion-item {
+        padding: 0;
+        summary {
+          display: block;
+          .indicator {
+            display: none;
+          }
+          .content.print-only {
+            display: block;
+            margin-top: 15px;
+            font-size: .925rem;
+            font-weight: normal;
+          }
+        }
+      }
+    }
+
+    section.resource-contributors {
+      background: #fff;
+      padding: 15px 0;
+      .inner {
+        display: block;
+      }
+      a.link {
+        display: none;
+      }
+    }
+  }
+}

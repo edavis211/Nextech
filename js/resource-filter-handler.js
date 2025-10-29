@@ -15,6 +15,7 @@ class ResourceFilterHandler {
     this.filterSection = document.getElementById('resource-filtergroup'); // Add filter section
     this.debounceTimer = null;
     this.debounceDelay = 300; // ms
+    this.clearFiltersButtonContainer = document.getElementById('clear-filters-container');
     
     // Infinite scroll properties
     this.currentPage = 1;
@@ -535,7 +536,9 @@ class ResourceFilterHandler {
     // Update display
     if (selectedTags.length === 0) {
       selectedContainer.innerHTML = '<span class="no-filters-message">No filters selected</span>';
+      this.clearFiltersButtonContainer?.setAttribute('hidden', '');
     } else {
+      this.clearFiltersButtonContainer?.removeAttribute('hidden');
       const tagsHtml = selectedTags.map(tag => 
         `<span class="filter-tag" data-type="${tag.type}" data-value="${tag.value}">
           ${tag.label}

@@ -221,7 +221,7 @@ $standards = build_term_hierarchy( $standards_flat );
       </div>
     </div>
     
-    <div class="clear-filters-action">
+    <div class="clear-filters-action" id="clear-filters-container">
       <button type="button" class="clear-filters" aria-label="Clear all selected filters">Clear Filters</button>
     </div>
     

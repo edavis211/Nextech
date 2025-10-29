@@ -4,6 +4,8 @@ main.single-topic {
  	background-color: #fff;
   padding-top: 5rem; 
   display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
   gap: clamp(3rem, 5vw, 5rem);
   margin: auto;
   justify-content: center;
@@ -26,6 +28,7 @@ main.single-topic {
   aside.sidebar {
     flex-basis: 23rem;
     flex-grow: 0;
+    flex-shrink: 0;
     padding-bottom: 3rem;
     background-color: #fff;
     @media screen and (max-width: $mobile-breakpoint) {

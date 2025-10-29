@@ -101,6 +101,15 @@ function build_material_action( $material, $action_config, $action_type ) {
 }
 
 /**
+ * Render material url for print version
+ */
+function render_material_print_url( $action ) {
+    if ( ! empty( $action['url'] ) && $action['url'] !== '#' ) {
+        echo '<div class="print-only">' . esc_html( $action['url'] ) .'</div>';
+    }
+}
+
+/**
  * Render material icon
  * 
  * @param string $icon_type Icon type to render
@@ -170,10 +179,11 @@ function render_action_button( $action ) {
                 </span>
                 
                 <div class="text-wrap">
-                  <h3><?php echo esc_html( $title ); ?></h3>
-                  <?php if ( ! empty( $note ) ) : ?>
+                    <h3><?php echo esc_html( $title ); ?></h3>
+                    <?php render_material_print_url( $action1 ); ?>
+                    <?php if ( ! empty( $note ) ) : ?>
                     <p class="material-note"><?php echo esc_html( $note ); ?></p>
-                  <?php endif; ?>
+                    <?php endif; ?>
                 </div>
                 
                 <div class="material-actions">

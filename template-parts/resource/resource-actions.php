@@ -1,6 +1,3 @@
-<div class="sbv">
-  <?=do_shortcode('[sbv_controls]'); ?>
-</div>
 <ul class="resource-action-buttons">
   <li>
     <button class="print" onclick="window.print()" title="Print this page" aria-label="Print this page">

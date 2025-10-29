@@ -1,0 +1,38 @@
+.print-only {
+  display: none;
+}
+
+@media print {
+  .print-only {
+    display: inline;
+  }
+  body {
+    width: 100%;
+    max-width: 780px;
+    margin: 0 auto;
+
+    header.site-header {
+      padding-inline: 0;
+      .site-branding {
+        max-width: 180px;
+      }
+      .main-navigation,
+      #menu-toggle {
+        display: none;
+      }
+    }
+
+    footer.site-footer {
+      section.footer-cta,
+      section.footer-main {
+        display: none;
+      }
+      section.footer-copyright {
+        justify-content: flex-start;
+        padding: 15px 0;
+        background: #fff;
+        color: #000;
+      }
+    }
+  }
+}
