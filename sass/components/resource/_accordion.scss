@@ -12,7 +12,7 @@ section.resource-accordion {
     details.accordion-item {
       background-color: #fff;
       padding-inline: clamp(10px, 2vw, 2rem);
-      padding-block: clamp(1rem, 3vw, 3rem);
+      padding-block: clamp(1rem, 3vw, 2rem);
       border-radius: 30px;
       summary {
         font-family: $font__heading;
@@ -26,7 +26,7 @@ section.resource-accordion {
         h2 {
           flex: 1 1 auto;
           margin: 0;
-          font-size: clamp(1rem, 4vw, 2rem);
+          font-size: clamp(1rem, 4vw, 1.6rem);
         }
         .indicator {
           display: flex;
@@ -60,7 +60,7 @@ section.resource-accordion {
         display: flex;
         gap: 2rem;
         .content {
-          padding-top: 2rem;
+          padding-top: 1rem;
           flex: 3;
         }
         .image {
