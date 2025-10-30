@@ -21,7 +21,15 @@ main.single-topic {
     flex-basis: 53rem;
     flex-grow: 1;
     >section:not(.topic-banner) {
-      padding-top: 3rem;
+      padding-top: 2rem;
+      &:first-of-type {
+        padding-top: 0;
+      }
+
+      h2 {
+        font-size: clamp(1.5rem, 3vw, 2.25rem);
+        margin-bottom: 1rem;
+      }
     }
   }
 

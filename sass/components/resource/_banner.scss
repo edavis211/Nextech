@@ -2,7 +2,7 @@ section.topic-banner,
 section.resource-banner {
   padding-inline: clamp(.5rem, 3vw, 3rem);
   .inner {
-    margin: 0 auto 3.125rem;
+    margin: 0 auto 1rem;
     max-width: 80rem;
     display: grid;
     gap: 1.25rem 2.5rem;
@@ -33,6 +33,7 @@ section.resource-banner {
     color: #fff;
     padding-block: 3rem;
     padding-inline: clamp(.5rem, 3vw, 3rem);
+    height: fit-content;
     ol.breadcrumb-list {
       list-style: none;
       padding: 0;

@@ -1,0 +1,89 @@
+body.page-template-default {
+  main {
+    .page-wrap {
+      width: 100%;
+      max-width: 80rem;
+      margin: 0 auto;
+      padding-inline: 1rem;
+    }
+  }
+  main.with-sidebar {
+    .page-wrap {
+      width: 100%;
+      max-width: 80rem;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 4fr 1fr;
+      gap: 2rem;
+    }
+
+    div.sidebar-container {
+      margin-block: clamp(2rem, 10vw, 3rem);
+      aside.sidebar-nav {
+        position: sticky;
+        top: 3.5rem;
+        background-color: #f4f4f4;
+        padding-top: 2rem;
+        padding-bottom: 1.5rem;
+        padding-inline: 1.5rem;
+        nav {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            li {
+              margin: 0;
+              padding: 0;
+              display: flex;
+              gap: 10px;
+              align-items: center;
+              opacity: .5;
+
+              &::before {
+                content: '';
+                width: 1rem;
+                height: 1rem;
+                display: inline-block;
+                border-radius: 50%;
+                background-color: $color__text-main;
+                transform: translateY(-1px);
+              }
+              &:focus-within {
+                &::before {
+                  background-color: $color__orange;
+                }
+              }
+              &:hover {
+                &::before {
+                  background-color: $color__orange;
+                }
+                a {
+                  color: $color__orange;
+                }
+              }
+              &.active {
+                opacity: 1;
+              }
+
+              a {
+                font-family: $font__heading;
+                color: $color__text-main;
+                text-decoration: none;
+                font-weight: 600;
+                padding: 0;
+              }
+
+            }
+          }
+        }
+
+      }
+    }
+  }
+}

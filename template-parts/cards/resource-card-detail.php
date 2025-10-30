@@ -26,7 +26,7 @@ if( $post_type === 'topic' && !empty($group_type) ) {
 
 ?>
 <article 
-  class="resource-card resource-card-detail" 
+  class="resource-card-detail" 
   aria-labelledby="resource-title-<?php echo esc_attr( $article->ID ); ?>" 
   data-resource-type="<?php echo esc_attr( $type_slug ); ?>"
   data-group-type="<?php echo esc_attr( $group_type ); ?>"
