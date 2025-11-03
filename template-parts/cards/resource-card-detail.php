@@ -1,5 +1,8 @@
 <?php 
 $article = $args['article'];
+if ( ! isset( $article )  || empty( $article ) ) {
+  return;
+}
 $post_type = get_post_type( $article );
 
 $resource_type = get_the_terms( $article->ID, 'resource-type' );

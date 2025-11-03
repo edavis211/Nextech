@@ -17,11 +17,13 @@ get_header();
 while ( have_posts() ) : the_post();?>
 	<main id="primary" class="site-main single-topic">
 		<div class="content-area">
+			<?php get_template_part( 'template-parts/topic/topic-banner' ); ?>
+			<div style="background-color: pink;">
 			<?php
-			get_template_part( 'template-parts/topic/topic-banner' );
 			get_template_part( 'template-parts/topic/topic-about' );
 			get_template_part( 'template-parts/topic/topic-activities' );
 			?>
+			</div>
 		</div>		
 		<aside class="sidebar">
 			<div class="actions resource-actions topic-actions">

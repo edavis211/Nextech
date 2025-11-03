@@ -40,8 +40,9 @@ main.front-page {
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: space-between;
         text-align: center;
-        padding: 2rem 1.5rem;
+        padding: 2rem 1rem;
         border-radius: 0 0 30px 30px;
         h2 {
           margin: 0;
@@ -60,11 +61,11 @@ main.front-page {
           margin-bottom: 2.5rem;
           a {
             font-family: $font__heading;
-            font-size: .875rem;
+            font-size: .75rem;
             font-weight: 600;
             border: 2px solid $color__text-main;
             border-radius: 30px;
-            padding-inline: 1rem;
+            padding-inline: .75rem;
             padding-block: .25rem;
             text-decoration: none;
             color: $color__text-main;
