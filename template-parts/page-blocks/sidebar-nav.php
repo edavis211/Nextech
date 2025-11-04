@@ -11,13 +11,16 @@ if( $blocks = get_field('page_blocks') ) {
   }
 }
 ?>
-<aside class="sidebar-nav">
+<aside class="sidebar-nav sidebar">
   <nav>
     <?php if ( count($navItems) ) : ?>
       <ul class="sidebar-nav-list">
         <?php foreach ( $navItems as $i => $item ) : ?>
           <li class="sidebar-nav-item <?php echo $i === 0 ? 'active' : ''; ?>">
-            <a href="#<?php echo esc_attr( $item['id'] ); ?>"><?php echo esc_html( $item['title'] ); ?></a>
+            <a href="#<?php echo esc_attr( $item['id'] ); ?>" title="<?php echo esc_attr( $item['title'] ); ?>">
+              <span class="icon"></span>
+              <span class="text"><?php echo esc_html( $item['title'] ); ?></span>
+            </a>
           </li>
         <?php endforeach; ?>
       </ul>

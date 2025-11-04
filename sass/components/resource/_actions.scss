@@ -1,4 +1,3 @@
-$mobile-breakpoint: 1000px;
 .resource-actions {
   grid-area: actions;
   ul.resource-action-buttons {
@@ -34,6 +33,8 @@ $mobile-breakpoint: 1000px;
         border-radius: 0;
         padding: .5rem 1rem;
         color: #000 !important;
+        text-align: left;
+        line-height: 1.2;
         &:focus,
         &:hover {
           background-color: $color__background-light;
@@ -155,22 +156,24 @@ $mobile-breakpoint: 1000px;
     }
   }
 
-  @media screen and (max-width: $mobile-breakpoint) {
+  @media screen and (max-width: 1200px) {
     .resource-actions {
       position: static;
       top: auto;
+      width: fit-content;
       ul.resource-action-buttons {
-        flex-direction: row;
+        flex-direction: column;
         justify-content: flex-end;
         gap: .5rem;
         li {
           flex: 0;
+          a.sbv-bookmark-login,
           button {
             font-size: .75rem;
             padding: .5rem;
             border-color: $color__background-light;
             .text {
-              display: none;
+              display: none !important;
             }
           }
         }
@@ -181,6 +184,17 @@ $mobile-breakpoint: 1000px;
         li.toc-wrap{
           display: flex;
         }
+      }
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    .resource-actions {
+      width: 100%;
+      ul.resource-action-buttons {
+        width: 100%;
+        flex-direction: row;
+        justify-content: flex-end;
       }
     }
   }

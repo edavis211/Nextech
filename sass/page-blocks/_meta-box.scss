@@ -1,6 +1,6 @@
 section.meta-box {
   padding-inline: clamp(1rem, 4vw, 2rem);
-  margin-block: clamp(2rem, 10vw, 3rem);
+  margin-block: 2rem;
   .meta {
     background-color: #f4f4f4;
     font-size: .9375rem;
@@ -8,7 +8,6 @@ section.meta-box {
     flex-direction: column;
     gap: .75rem;
     margin-top: 2rem;
-    max-width: 800px;
     margin: auto;
     padding-block: 1.5rem;
     padding-inline: clamp(1rem, 4vw, 2rem);

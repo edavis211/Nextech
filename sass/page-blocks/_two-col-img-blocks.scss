@@ -1,11 +1,11 @@
 section.two_column_image_blocks {
-  padding-inline: clamp(1rem, 5vw, 3rem);
-  padding-block: 5rem;
+  padding-inline: clamp(1rem, 5vw, 2rem);
+  padding-block: 2rem;
   .container {
     max-width: 80rem;
     margin: auto;
     .header {
-      padding-bottom: clamp(3rem, 5vw, 5rem);
+      padding-bottom: 3rem;
       max-width: 1000px;
       margin: auto;
       display: grid;
@@ -22,7 +22,7 @@ section.two_column_image_blocks {
         justify-content: center;
       }
       h2 {
-        font-size: clamp(2rem, 4vw, 2.625rem);
+        font-size: clamp(2rem, 4vw, 2.25rem);
         line-height: 1.25;
         text-align: right;
         margin: 0;
@@ -62,7 +62,7 @@ section.two_column_image_blocks {
           grid-area: image;
           position: relative;
           height: 100%;
-          min-height: clamp(300px, 50vw, 640px);
+          min-height: clamp(300px, 50vw, 500px);
           img {
             position: absolute;
             top: 0;

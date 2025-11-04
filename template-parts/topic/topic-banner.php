@@ -1,4 +1,4 @@
-<section class="topic-banner" id="overview">
+<header class="topic-banner entry-header">
   <div class="inner">
     <div class="infoblock">
       <?php get_template_part( 'template-parts/topic/topic-breadcrumbs' ); ?>
@@ -12,6 +12,8 @@
         <?php get_template_part( 'template-parts/resource/resource-courses' ); ?>
       </div>
     </div>
-    <div class="logo-divider"></div>
+    <div class="actions resource-actions">
+      <?php get_template_part( 'template-parts/resource/resource-actions' ); ?>
+    </div>
   </div>
-</section>
+</header>

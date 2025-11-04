@@ -1,6 +1,10 @@
 section.resource-grid {
-  margin-block: clamp(2rem, 10vw, 3rem);
-  padding-inline: clamp(1rem, 5vw, 3rem);
+  padding-inline: clamp(1rem, 5vw, 2rem);
+  margin-block: 2rem;
+  padding-block: 0;
+  @media screen and (max-width: 600px) {
+    padding-inline: 0;
+  }
   
   .resource-wrap {
     display: flex;
@@ -13,6 +17,9 @@ section.resource-grid {
       margin: 0 auto;
       flex-grow: 1;
       padding: 2rem;
+      @media screen and (max-width: 600px) {
+        padding: 2rem .5rem;
+      }
 
       .resource-cards {
         display: grid;

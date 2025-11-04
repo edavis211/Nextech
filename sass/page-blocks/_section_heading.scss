@@ -1,14 +1,12 @@
 section.section-heading {
-  margin-block: clamp(2rem, 10vw, 3rem);
-  padding-inline: clamp(1rem, 5vw, 3rem);
+  margin-block: 2rem;
+  padding-inline: clamp(1rem, 5vw, 2rem);
   
   .logo-divider {
     width: 100%;
-    max-width: 800px;
     margin: 1rem auto;
   }
   .inner {
-    max-width: 800px;
     margin: 1rem auto;
     display: flex;
     gap: clamp(2rem, 5vw, 3rem);

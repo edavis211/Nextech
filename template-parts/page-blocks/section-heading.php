@@ -16,7 +16,7 @@ $image = isset($block['image']) ? $block['image'] : null;
   
       <?php if ($description): ?>
         <div class="section-description">
-          <?php echo wp_kses_post($description); ?>
+          <?php echo $description; ?>
         </div>
       <?php endif; ?>
     </div>
