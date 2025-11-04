@@ -1,0 +1,55 @@
+$mobile-breakpoint: 1000px;
+section.activities-block {
+  margin-block: 2rem;
+  padding-inline: clamp(1rem, 5vw, 2rem);
+  h2 {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+  }
+
+  .activities-grid {
+     margin-top: clamp(3rem, 5vw, 5rem);
+
+    .activity-group {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(2rem, 5vw, 3rem);
+      padding-top: 2rem;
+      @media screen and (max-width: $mobile-breakpoint) {
+        border-bottom: 2px solid $color__background-dark;
+      }
+
+      .activity-resource {
+        display: flex;
+        gap: clamp(2rem, 5vw, 3rem);
+        margin-bottom: 2rem;
+        @media screen and (max-width: $mobile-breakpoint) {
+          flex-direction: column-reverse;
+          gap: 0;
+        }
+
+        article {
+          flex-basis: 25rem;
+          flex-grow: 0;
+          background-color: $color__background-light;
+          @media screen and (max-width: $mobile-breakpoint) {
+            flex-basis: auto;
+            width: 100%;
+          }
+        }
+
+        .activity-resource-description {
+          flex-basis: 25rem;
+          flex-grow: 1;
+          @media screen and (max-width: $mobile-breakpoint) {
+            flex-basis: auto;
+            width: 100%;
+          }
+          p {
+            font-size: clamp(.875rem, 1.5vw, 1rem);
+          }
+        }
+      }
+    }
+
+  }
+}

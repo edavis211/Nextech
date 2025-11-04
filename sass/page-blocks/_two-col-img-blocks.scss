@@ -1,6 +1,9 @@
 section.two_column_image_blocks {
   padding-inline: clamp(1rem, 5vw, 2rem);
   padding-block: 2rem;
+  @media screen and (max-width: 600px) {
+    padding-inline: 0;
+  }
   .container {
     max-width: 80rem;
     margin: auto;
@@ -15,6 +18,10 @@ section.two_column_image_blocks {
         grid-template-columns: 1fr;
         text-align: center;
       }
+      @media screen and (max-width: 600px) {
+        padding-inline: 1rem;
+      }
+
       .col {
         display: flex;
         flex-direction: column;
@@ -55,7 +62,6 @@ section.two_column_image_blocks {
           gap: 40px;
           &:nth-child(even) {
             grid-template-areas: "image" "text";
-            margin-top: 40px;
           }
         }
         .imgcol {

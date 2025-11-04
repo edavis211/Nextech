@@ -26,6 +26,8 @@ if( $blocks = get_field('page_blocks') ) {
       get_template_part( 'template-parts/page-blocks/resource-grid', null, ['block' => $block] );
     elseif ($block['acf_fc_layout'] == 'section_heading') :
       get_template_part( 'template-parts/page-blocks/section-heading', null, ['block' => $block] );
+    elseif ($block['acf_fc_layout'] == 'activities_block') :
+      get_template_part( 'template-parts/page-blocks/activities-block', null, ['block' => $block] );  
     endif;
   }
 }
