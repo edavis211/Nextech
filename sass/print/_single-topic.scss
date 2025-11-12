@@ -8,29 +8,36 @@
       display: none;
     }
 
-    .content-area {
-      display: block;
-      .topic-banner {
-        .inner {
-          margin-bottom: 0;
-          .infoblock {
-            background-color: white;
+    .topic-banner {
+      padding: 0;
+      .inner {
+        margin-bottom: 0;
+        padding: 0;
+        display: block;
+        .infoblock {
+          background-color: white;
+          color: #000;
+          padding-inline: 0;
+          padding-top: 30px;
+          nav.breadcrumbs {
             color: #000;
-            padding-inline: 0;
-            padding-top: 30px;
-            nav.breadcrumbs {
+            ol, li, a {
               color: #000;
-              ol, li, a {
-                color: #000;
-              }
             }
           }
+        }
 
-          .featured-img {
-            display: none;
-          }
+        .actions {
+          display: none;
+        }
+
+        .featured-img {
+          display: none;
         }
       }
+    }
+    .content-area {
+      display: block;
       section#about {
         padding-top: 0;
         h2 {
@@ -42,8 +49,76 @@
       }
     }
 
-    aside.sidebar {
-      display: none;
+    
+    .page-wrap {
+      display: block !important;
+      padding: 0 !important;
+      .sidebar-container {
+        display: none;
+      }
+
+      .page-blocks-container {
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .section-heading {
+        margin: 0 !important;
+        padding: 0 !important;
+
+        .col.img {
+          display: none !important;
+        }
+      }
+
+      section.video-block {
+        display: none !important;
+      }
+
+      section.activities-block,
+      section.text-block {
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      section.two_column_image_blocks {
+        margin: 0 !important;
+        padding: 1rem !important;
+        .container {
+          .header {
+            display: block !important;
+            padding-bottom: 1rem !important;
+            .col {
+              display: block !important;
+              h2 {
+                text-align: left !important;
+              }
+            }
+          }
+          .blocks {
+            .block {
+              display: block !important;
+              margin: 0 !important;
+              padding: 0 !important;
+              background: transparent !important;
+              color: #000 !important;
+              .textcol {
+                background: #f4f4f4 !important;
+                padding: .5rem 0 !important;
+                color: #000 !important;
+              }
+              .imgcol {
+                display: none !important;
+              }
+            }
+          }
+        }
+      }
+
+      section.resource-grid {
+        margin: 0 !important;
+        padding: 0 !important;
+      }
     }
   }
 
