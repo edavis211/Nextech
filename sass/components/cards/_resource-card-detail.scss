@@ -1,15 +1,16 @@
 article.resource-card-detail {
-  --color-theme: #e98300;
   &[data-post-type="resource"]{
-    &[data-resource-type="classroom-tools"] {
+    --color-theme: #e98300;
+    &[data-resource-type-parent="classroom-tools"] {
       --color-theme:#e98300;
     }
-    &[data-resource-type="lesson-activity-plans"] {
+    &[data-resource-type-parent="lesson-activity-plans"] {
       --color-theme: #55d4e5;
     }
   }
 
   &[data-post-type="topic"]{
+    --color-theme: #e2d313;
     &[data-group-type="course"] {
       --color-theme: #5454ef;
     }
