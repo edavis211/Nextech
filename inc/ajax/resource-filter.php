@@ -83,9 +83,9 @@ class Resource_Filter_Ajax {
             'tax_query' => array()
         );
         
-        // Search query
+        // Search query - enhanced to include keywords taxonomy
         if ( ! empty( $filters['search'] ) ) {
-            $args['s'] = $filters['search'];
+            $this->add_search_with_keywords( $args, $filters['search'] );
         }
         
         // Taxonomy queries
@@ -129,6 +129,79 @@ class Resource_Filter_Ajax {
                 );
             }
         }
+    }
+    
+    /**
+     * Add search functionality that includes keywords and other taxonomies
+     */
+    private function add_search_with_keywords( &$args, $search_term ) {
+        // Get post IDs from default WordPress search (titles, content, excerpts)
+        $content_search_args = array(
+            'post_type' => $args['post_type'],
+            'post_status' => 'publish',
+            's' => $search_term,
+            'posts_per_page' => -1,
+            'fields' => 'ids'
+        );
+        
+        $content_query = new WP_Query( $content_search_args );
+        $content_post_ids = $content_query->posts;
+        
+        // Get post IDs from taxonomy searches (LIKE matching)
+        $taxonomy_post_ids = array();
+        
+        // Define taxonomies to search
+        $searchable_taxonomies = array(
+            'keyword',
+            'subject-matter',
+            'academic-standard',
+            'resource-type'
+        );
+        
+        foreach ( $searchable_taxonomies as $taxonomy ) {
+            if ( taxonomy_exists( $taxonomy ) ) {
+                // Search for terms using LIKE matching
+                $matching_terms = get_terms( array(
+                    'taxonomy' => $taxonomy,
+                    'name__like' => $search_term,
+                    'hide_empty' => true
+                ) );
+                
+                if ( ! empty( $matching_terms ) ) {
+                    // Get posts that have any of these terms
+                    $taxonomy_search_args = array(
+                        'post_type' => $args['post_type'],
+                        'post_status' => 'publish',
+                        'posts_per_page' => -1,
+                        'fields' => 'ids',
+                        'tax_query' => array(
+                            array(
+                                'taxonomy' => $taxonomy,
+                                'field' => 'term_id',
+                                'terms' => wp_list_pluck( $matching_terms, 'term_id' ),
+                                'operator' => 'IN'
+                            )
+                        )
+                    );
+                    
+                    $taxonomy_query = new WP_Query( $taxonomy_search_args );
+                    $taxonomy_post_ids = array_merge( $taxonomy_post_ids, $taxonomy_query->posts );
+                }
+            }
+        }
+        
+        // Combine all post IDs (OR relationship)
+        $combined_post_ids = array_unique( array_merge( $content_post_ids, $taxonomy_post_ids ) );
+        
+        if ( ! empty( $combined_post_ids ) ) {
+            $args['post__in'] = $combined_post_ids;
+        } else {
+            // No matches found - set impossible post ID to return empty results
+            $args['post__in'] = array( 0 );
+        }
+        
+        // Remove the 's' parameter since we're using post__in
+        unset( $args['s'] );
     }
     
     /**
