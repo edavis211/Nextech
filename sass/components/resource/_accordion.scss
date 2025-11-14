@@ -62,6 +62,10 @@ section.resource-accordion {
         .content {
           padding-top: 1rem;
           flex: 3;
+
+          ul, ol {
+            margin-left: 1.5rem;
+          }
         }
         .image {
           flex: 2;
