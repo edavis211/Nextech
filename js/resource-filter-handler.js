@@ -412,11 +412,15 @@ class ResourceFilterHandler {
       this.resultsContainer.innerHTML = data.html || '<p>No resources found.</p>';
     }
     
-    // Update pagination state
+    // Update pagination state - do this FIRST to prevent race conditions
     if (data.pagination) {
       this.currentPage = data.pagination.current_page;
       this.totalPages = data.pagination.total_pages;
-      this.hasMorePosts = this.currentPage < this.totalPages;
+      // More aggressive check: if we have 1 or fewer pages, definitely no more posts
+      this.hasMorePosts = this.totalPages > 1 && this.currentPage < this.totalPages;
+    } else {
+      // If no pagination data, assume no more posts
+      this.hasMorePosts = false;
     }
     
     // Update result count if element exists
@@ -787,7 +791,10 @@ class ResourceFilterHandler {
    * Check if we should load more posts
    */
   checkScrollPosition() {
-    if (this.isLoading || !this.hasMorePosts) return;
+    // Enhanced checks to prevent race conditions
+    if (this.isLoading || !this.hasMorePosts || this.totalPages <= 1 || this.currentPage >= this.totalPages) {
+      return;
+    }
     
     const scrollPosition = window.innerHeight + window.scrollY;
     const documentHeight = document.documentElement.scrollHeight;
@@ -801,7 +808,10 @@ class ResourceFilterHandler {
    * Load more posts for infinite scroll
    */
   async loadMorePosts() {
-    if (this.isLoading || !this.hasMorePosts) return;
+    // Multiple safeguards to prevent unnecessary requests
+    if (this.isLoading || !this.hasMorePosts || this.totalPages <= 1 || this.currentPage >= this.totalPages) {
+      return;
+    }
     
     this.isLoading = true;
     this.showInfiniteScrollLoading();
@@ -873,8 +883,8 @@ class ResourceFilterHandler {
    */
   resetPagination() {
     this.currentPage = 1;
-    this.hasMorePosts = true;
     this.totalPages = 1;
+    this.hasMorePosts = false; // Start with false, will be set to true only if totalPages > 1
   }
 
   /**
