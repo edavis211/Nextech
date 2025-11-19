@@ -13,6 +13,7 @@ body.page-template-template-resource-library {
       position: relative;
       overflow: visible;
       header.entry-header {
+        padding: 0;
         h1 {
           margin-bottom: 2.5rem;
         }
@@ -127,6 +128,7 @@ body.page-template-template-resource-library {
       .resource-wrap {
         display: flex;
         gap: clamp(2.5rem, 3vw, 5rem);
+        justify-content: space-between;
 
         .resource-container {
           background-color: transparent;
@@ -158,6 +160,16 @@ body.page-template-template-resource-library {
             grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
             gap: 2rem;
           }
+        }
+      }
+
+      .lower {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-block: 60px;
+        .back-to-top {
+          margin: auto;
         }
       }
     }

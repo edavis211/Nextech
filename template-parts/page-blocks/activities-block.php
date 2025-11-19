@@ -2,8 +2,12 @@
 $activitiesBlock = isset( $args['block'] ) ? $args['block'] : null; 
 ?>
 <section class="activities-block" id="activities">
-  <h2><?php echo esc_html($activitiesBlock['heading']); ?></h2>
-  <div class="activities-content"><?php echo $activitiesBlock['content']; ?></div>
+  <?php if ( isset( $activitiesBlock['heading'] ) && $activitiesBlock['heading'] ) : ?>
+    <h2><?php echo esc_html($activitiesBlock['heading']); ?></h2>
+  <?php endif; ?>
+  <?php if ( isset( $activitiesBlock['content'] ) && $activitiesBlock['content'] ) : ?>
+    <div class="activities-content"><?php echo $activitiesBlock['content']; ?></div>
+  <?php endif; ?>
   <?php if (isset($activitiesBlock['activities']) && is_array($activitiesBlock['activities']) && count($activitiesBlock['activities'])) : ?>
     <div class="activities-grid">
         <?php foreach ( $activitiesBlock['activities'] as $activity ) : ?>
@@ -11,8 +15,8 @@ $activitiesBlock = isset( $args['block'] ) ? $args['block'] : null;
           <?php if( isset($activity['activity_detail']) && $activity['activity_detail'] ) : ?>
             <div class="activity-detail"><?php echo $activity['activity_detail']; ?></div>
           <?php endif; ?>
-          <div class="activity-group">
-            <?php if (isset($activity['resources']) && is_array($activity['resources']) && count($activity['resources'])) : ?>
+          <?php if (isset($activity['resources']) && is_array($activity['resources']) && count($activity['resources'])) : ?>
+            <div class="activity-group">
               <article class="activity-resource-wrap">
                 <?php foreach ( $activity['resources'] as $resource ) : ?>
                   <div class="activity-resource">
@@ -21,8 +25,8 @@ $activitiesBlock = isset( $args['block'] ) ? $args['block'] : null;
                   </div>
                 <?php endforeach; ?>
               </article>
-            <?php endif; ?>
-          </div>
+            </div>
+          <?php endif; ?>
         <?php endforeach; ?>
     </div>
   <?php endif; ?>

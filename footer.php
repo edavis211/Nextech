@@ -25,7 +25,10 @@ $socialLinks = get_field( 'social_links', 'option' );
 		<section class="footer-main">
 			<div class="subscribe">
 				<h2><?= $footerSubbscribeHeading; ?></h2>
-				<form action="#" method="post">
+				<p>Create a free account to save helpful teaching resources, rate the tools you've tried, and stay updated as new classroom-ready materials are added. Keep everything you need for planning and instruction in one place</p>
+				<a class="button-orange sbv-no-auth" href="<?=get_site_url()?>/profile/#signup">Sign Up</a>
+				<a class="button-orange sbv-auth-only" href="<?=get_site_url()?>/profile/">My Profile</a>
+				<!-- <form action="#" method="post">
 					<input type="email" name="email" placeholder="Enter your email address" required>
 					<button type="submit" title="Subscribe" aria-label="Subscribe">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.3 16.63">
@@ -35,34 +38,7 @@ $socialLinks = get_field( 'social_links', 'option' );
 							</g>
 						</svg>
 					</button>
-				</form>
-				<div class="social">
-					<a href="<?= $socialLinks['instagram']; ?>" aria-label="Instagram">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20.09">
-							<g>
-								<g>
-									<path d="M10.04,0c1.42,0,2.84,0,4.26,0,2.69,0,5.13,1.73,5.58,4.63.06.41.11.83.11,1.25,0,2.76.02,5.51,0,8.27,0,1.53-.42,2.94-1.46,4.11-1.14,1.28-2.64,1.78-4.3,1.8-2.83.03-5.65.05-8.48,0-2.27-.04-4.13-.93-5.15-3.07-.33-.7-.54-1.51-.56-2.28C-.01,11.61-.01,8.52.03,5.43.08,2.37,2.47.05,5.53.01c1.5-.02,3.01,0,4.51,0h0ZM10,18.16v.02c1.39,0,2.78,0,4.18,0,.13,0,.25-.01.38-.02,2.17-.14,3.59-1.58,3.62-3.75.03-2.91.04-5.82,0-8.73-.03-2.33-1.54-3.84-3.87-3.88-2.88-.04-5.77-.04-8.65,0-2.32.03-3.81,1.48-3.84,3.74-.04,2.95-.04,5.91,0,8.86.03,2.15,1.5,3.66,3.63,3.76,1.51.07,3.03.01,4.55.01Z"/>
-									<path d="M4.84,9.92c.09-2.99,2.4-5.17,5.37-5.07,2.79.09,5.05,2.51,4.96,5.3-.09,2.87-2.51,5.01-5.53,4.92-2.61-.08-4.87-2.52-4.79-5.15ZM6.64,9.94c0,1.85,1.49,3.35,3.33,3.35,1.81,0,3.32-1.52,3.32-3.33,0-1.83-1.51-3.34-3.35-3.34-1.83,0-3.31,1.49-3.31,3.32Z"/>
-									<path d="M15.32,5.79c-.68,0-1.19-.5-1.19-1.18,0-.7.52-1.22,1.21-1.21.68.01,1.18.52,1.17,1.2,0,.67-.52,1.19-1.19,1.19Z"/>
-								</g>
-							</g>
-						</svg>
-					</a>
-					<a href="<?= $socialLinks['facebook']; ?>" aria-label="Facebook">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9.29 20">
-							<g>
-								<path d="M6.13,4.4c0-.78.52-.96.88-.96h2.23V.01h-3.08c-3.41-.01-4.19,2.54-4.19,4.18v2.29H0v3.53h1.98v9.99h4.15v-9.99h2.8l.36-3.53h-3.17v-2.08Z"/>
-							</g>
-						</svg>
-					</a>
-					<a href="<?= $socialLinks['twitter']; ?>" aria-label="Twitter">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 18.39">
-							<g>
-								<path d="M12.03,7.88L18.99,0h-3.08l-5.25,6.07L6.18.17H0l7.6,9.88L.36,18.3h3.02l5.68-6.36,4.95,6.44h5.99l-7.97-10.51ZM3.37,1.83h1.98l11.22,14.81h-1.83L3.37,1.83Z"/>
-							</g>
-						</svg>
-					</a>
-				</div>
+				</form> -->
 			</div>
 			<div class="site-info">
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 76.98">
@@ -105,6 +81,34 @@ $socialLinks = get_field( 'social_links', 'option' );
 					</g>
 				</svg>				
 				<p><?= $footerSiteDescription; ?></p>
+				<div class="social">
+					<a href="<?= $socialLinks['instagram']; ?>" aria-label="Instagram">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20.09">
+							<g>
+								<g>
+									<path d="M10.04,0c1.42,0,2.84,0,4.26,0,2.69,0,5.13,1.73,5.58,4.63.06.41.11.83.11,1.25,0,2.76.02,5.51,0,8.27,0,1.53-.42,2.94-1.46,4.11-1.14,1.28-2.64,1.78-4.3,1.8-2.83.03-5.65.05-8.48,0-2.27-.04-4.13-.93-5.15-3.07-.33-.7-.54-1.51-.56-2.28C-.01,11.61-.01,8.52.03,5.43.08,2.37,2.47.05,5.53.01c1.5-.02,3.01,0,4.51,0h0ZM10,18.16v.02c1.39,0,2.78,0,4.18,0,.13,0,.25-.01.38-.02,2.17-.14,3.59-1.58,3.62-3.75.03-2.91.04-5.82,0-8.73-.03-2.33-1.54-3.84-3.87-3.88-2.88-.04-5.77-.04-8.65,0-2.32.03-3.81,1.48-3.84,3.74-.04,2.95-.04,5.91,0,8.86.03,2.15,1.5,3.66,3.63,3.76,1.51.07,3.03.01,4.55.01Z"/>
+									<path d="M4.84,9.92c.09-2.99,2.4-5.17,5.37-5.07,2.79.09,5.05,2.51,4.96,5.3-.09,2.87-2.51,5.01-5.53,4.92-2.61-.08-4.87-2.52-4.79-5.15ZM6.64,9.94c0,1.85,1.49,3.35,3.33,3.35,1.81,0,3.32-1.52,3.32-3.33,0-1.83-1.51-3.34-3.35-3.34-1.83,0-3.31,1.49-3.31,3.32Z"/>
+									<path d="M15.32,5.79c-.68,0-1.19-.5-1.19-1.18,0-.7.52-1.22,1.21-1.21.68.01,1.18.52,1.17,1.2,0,.67-.52,1.19-1.19,1.19Z"/>
+								</g>
+							</g>
+						</svg>
+					</a>
+					<a href="<?= $socialLinks['facebook']; ?>" aria-label="Facebook">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9.29 20">
+							<g>
+								<path d="M6.13,4.4c0-.78.52-.96.88-.96h2.23V.01h-3.08c-3.41-.01-4.19,2.54-4.19,4.18v2.29H0v3.53h1.98v9.99h4.15v-9.99h2.8l.36-3.53h-3.17v-2.08Z"/>
+							</g>
+						</svg>
+					</a>
+					<a href="<?= $socialLinks['twitter']; ?>" aria-label="Twitter">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 18.39">
+							<g>
+								<path d="M12.03,7.88L18.99,0h-3.08l-5.25,6.07L6.18.17H0l7.6,9.88L.36,18.3h3.02l5.68-6.36,4.95,6.44h5.99l-7.97-10.51ZM3.37,1.83h1.98l11.22,14.81h-1.83L3.37,1.83Z"/>
+							</g>
+						</svg>
+					</a>
+				</div>
+
 			</div>
 			<div class="links">
 				<div class="col">
@@ -119,14 +123,16 @@ $socialLinks = get_field( 'social_links', 'option' );
 				<div class="col">
 					<h2>Profile</h2>
 					<ul>
-						<li><a href="<?= get_site_url(); ?>/profile">Log In</a></li>
+						<li class="sbv-no-auth"><a href="<?= get_site_url(); ?>/profile">Log In</a></li>
+						<li class="sbv-auth-only"><a href="<?= get_site_url(); ?>/profile">Log Out</a></li>
 						<li><a href="<?= get_site_url(); ?>/profile">Account Details</a></li>
-						<li><a href="#">Saved Resources</a></li>
-						<li><a href="#">Stay Updated</a></li>
+						<li class="sbv-auth-only"><a href="<?= get_site_url(); ?>/profile/#library">Saved Resources</a></li>
+						<li><a href="<?= get_site_url(); ?>/profile">Preferences</a></li>
 					</ul>
 				</div>
 			</div>
 		</section>
+
 
 		<section class="footer-copyright">
 			<p>&copy; <?php echo date('Y'); ?> Nexus</p>

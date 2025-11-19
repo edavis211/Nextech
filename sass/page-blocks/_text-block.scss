@@ -1,9 +1,8 @@
 section.text-block {
   margin-block: 2rem;
-  padding-inline: clamp(1rem, 5vw, 3rem);
+  padding-inline: clamp(1rem, 5vw, 2rem);
 
   .inner {
-    max-width: 800px;
     margin: 0 auto;
     font-size: 18px;
     line-height: 1.8;

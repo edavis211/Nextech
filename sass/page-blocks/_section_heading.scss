@@ -26,6 +26,12 @@ section.section-heading {
         margin-top: 0;
         font-size: clamp(1.75rem, 3vw, 2.5rem);
       }
+      .section-description {
+        p:last-of-type {
+          margin-bottom: 0;
+        }
+      }
+
     }
     .col.img {
       flex: 1 1 400px;
