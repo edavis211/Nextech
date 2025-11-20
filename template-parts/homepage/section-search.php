@@ -1,6 +1,6 @@
 <section class="quick-search">
   <div class="inner">
-    <h2>Search for Computer Science Resources for Your Classroom</h2>
+    <h2><?=get_field('homepage_search_heading');?></h2>
     <form action="<?=get_site_url();?>/resource-library/" id="keyword-search">
       <input type="text" name="search" placeholder="Search by keyword" />
       <button type="submit">

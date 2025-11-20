@@ -11,8 +11,8 @@
 
 $footerCTABlock = get_field( 'footer_cta_block', 'option' );
 $footerSiteDescription = get_field( 'footer_site_description', 'option' );
-$footerSubbscribeHeading = get_field( 'footer_subscribe_heading', 'option' );
 $socialLinks = get_field( 'social_links', 'option' );
+$footerSignUpBlock = get_field( 'footer_sign_up_block', 'option' );
 
 ?>
 
@@ -24,8 +24,8 @@ $socialLinks = get_field( 'social_links', 'option' );
 
 		<section class="footer-main">
 			<div class="subscribe">
-				<h2><?= $footerSubbscribeHeading; ?></h2>
-				<p>Create a free account to save helpful teaching resources, rate the tools you've tried, and stay updated as new classroom-ready materials are added. Keep everything you need for planning and instruction in one place</p>
+				<h2><?= $footerSignUpBlock['heading'] ?></h2>
+				<p><?= $footerSignUpBlock['description'] ?></p>
 				<a class="button-orange sbv-no-auth" href="<?=get_site_url()?>/profile/#signup">Sign Up</a>
 				<a class="button-orange sbv-auth-only" href="<?=get_site_url()?>/profile/">My Profile</a>
 				<!-- <form action="#" method="post">
